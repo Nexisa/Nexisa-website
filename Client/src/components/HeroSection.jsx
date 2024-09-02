@@ -1,5 +1,6 @@
-import React from 'react';
-import '../Styles/Herosection.css'; 
+// import React from 'react';
+import '../Styles/Herosection.css';
+import heroImg from '../assets/Logo/heroImg.png';
 
 function HeroSection() {
   return (
@@ -15,7 +16,7 @@ function HeroSection() {
         </div>
         <div className="md:w-1/2 flex justify-center">
           <img
-            src="your-image-url-here" // Replace with the actual path to your image
+            src={heroImg} // Replace with the actual path to your image
             alt="Digital Experience"
             className="w-3/4 h-auto animate-float"
           />

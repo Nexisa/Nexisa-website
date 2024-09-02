@@ -1,12 +1,17 @@
-import React from 'react';
+// import React from 'react';
 import Navbar from './components/Nav';
-import HeroSection from './components/HeroSection';
+import Landing from './pages/Landing';
+import { Route, Routes } from "react-router-dom"
+import PortfolioPage from './pages/PortfolioPage';
 
 function App() {
   return (
-    <div>
+    <div className='flex min-h-screen w-screen flex-col'>
       <Navbar />
-      <HeroSection />
+      <Routes>
+        <Route path="/" element={<Landing/>}/>
+        <Route path='/portfolio' element={<PortfolioPage/>}/>
+      </Routes>
     </div>
   );
 }
