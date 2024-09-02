@@ -12,7 +12,7 @@ const Navbar = () => {
         </div>
 
         {/* Navigation Links */}
-        <ul className="flex space-x-8 text-gray-800 font-medium">
+        <ul className="hidden md:flex space-x-8 text-gray-800 font-medium">
           <li className="relative group">
             <a href="#" className="hover:text-blue-500 transition-colors duration-300">Home</a>
             <div className="absolute left-0 bottom-0 h-0.5 w-0 bg-blue-500 transition-all duration-300 group-hover:w-full"></div>

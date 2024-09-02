@@ -6,7 +6,7 @@ import PortfolioPage from './pages/PortfolioPage';
 
 function App() {
   return (
-    <div className='flex min-h-screen w-screen flex-col'>
+    <div className='flex min-h-screen max-w-screen flex-col'>
       <Navbar />
       <Routes>
         <Route path="/" element={<Landing/>}/>
