@@ -1,5 +1,5 @@
 // import React from 'react';
-import logo from '../assets/Logo/nexisa.png'
+import logo from '../assets/Logo/Nexisa.svg'
 
 const Navbar = () => {
   return (
@@ -7,7 +7,7 @@ const Navbar = () => {
       <div className="container mx-auto flex justify-between items-center py-4 px-6">
         {/* Logo */}
         <div className="flex items-center">
-          <img src={logo} alt="Nexisa Logo" className="h-10 w-32" />
+          <img src={logo} alt="Nexisa Logo" className="h-20 w-36" />
           {/* <span className="text-pink-500 text-2xl font-bold ml-2">NEXISA</span> */}
         </div>
 
