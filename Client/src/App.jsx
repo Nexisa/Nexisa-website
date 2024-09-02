@@ -3,6 +3,7 @@ import Navbar from './components/Nav';
 import Landing from './pages/Landing';
 import { Route, Routes } from "react-router-dom"
 import PortfolioPage from './pages/PortfolioPage';
+// import AboutUs from './components/AboutUs';
 
 function App() {
   return (
