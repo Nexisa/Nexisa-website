@@ -1,8 +1,21 @@
+//portfolio
 import hostel from '../assets/Portfolio/hostel.jpg'
 import health from '../assets/Portfolio/health.jpg'
 import festival from '../assets/Portfolio/festival.jpg'
 import rescue from '../assets/Portfolio/rescue.jpg'
 import baizu from '../assets/Portfolio/baizu.jpg'
+
+//teams
+import aneek from '../assets/Team/Aneek.jpg'
+import puja from '../assets/Team/Puja.jpg'
+import simpy from '../assets/Team/simpy.jpg'
+import sahel from '../assets/Team/Sahel.jpg'
+import priya from '../assets/Team/Priya.jpg'
+import khushi from '../assets/Team/Khushi.jpg';
+import asham from '../assets/Team/Asham.jpg';
+import omkar from '../assets/Team/Omkar.jpg'
+import priyanshu from '../assets/Team/Priyanshu.jpg'
+import srijita from '../assets/Team/Srijita.jpg'
 
 export const portfolioData = [
   {
@@ -31,3 +44,56 @@ export const portfolioData = [
     imageUrl: `${baizu}`
   },
 ];
+
+export const teamData = [
+  {
+    imgUrl: `${aneek}`,
+    name: 'ANEEK MAJUMDAR',
+    role: 'Chief Executive Officer'
+  },
+  {
+    imgUrl: `${puja}`,
+    name: 'PUJA MONDAL',
+    role: 'HR Manager, Front-End Developer'
+  },
+  {
+    imgUrl: `${simpy}`,
+    name: 'SIMPY KUMARI NONIA',
+    role: 'Full-Stack Developer'
+  },
+  {
+    imgUrl: `${sahel}`,
+    name: 'SAHEL BEJ',
+    role: 'Data Scientist'
+  },
+  {
+    imgUrl: `${priya}`,
+    name: 'PRIYA ROY',
+    role: 'Front-End Developer Intern'
+  },
+  {
+    imgUrl: `${khushi}`,
+    name: 'KHUSHI JAISWAL',
+    role: 'Front-End Developer Intern'
+  },
+  {
+    imgUrl: `${asham}`,
+    name: 'MD. ASHAM IMAD',
+    role: 'Full-Stack Developer Intern'
+  },
+  {
+    imgUrl: `${omkar}`,
+    name: 'OMKAR ABHISHEK JHA',
+    role: 'Front-End Developer Intern'
+  },
+  {
+    imgUrl: `${priyanshu}`,
+    name: 'PRIYANSHU DEY',
+    role: 'Backend Developer Intern'
+  },
+  {
+    imgUrl: `${srijita}`,
+    name: 'SRIJITA DAS',
+    role: 'Backend Developer Intern'
+  },
+]
