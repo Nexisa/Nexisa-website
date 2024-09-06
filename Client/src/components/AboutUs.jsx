@@ -4,41 +4,39 @@ import img from '../assets/Logo/about.jpg'
 
 const AboutUs = () => {
     return (
-        <section className=" bg-gray-50">
 
-            <div className="container mx-auto py-16 flex justify-center items-center w-5/6">
-            <div className='flex flex-col w-1/2'>
+        <div className="container mx-auto py-12 flex gap-8 flex-col-reverse md:flex-row justify-center items-center w-full md:w-5/6">
+            <div className='flex flex-col md:w-1/2 w-11/12 sm:mx-auto'>
                 <div className='flex flex-col'>
-                    <h1 className="text-4xl font-bold text-left mb-8">About Us</h1>
-                    <p className="text-lg text-gray-700 text-left mb-12 italic">
-                        Welcome to Nexisa, your trusted partner in cutting-edge IT solutions and training.
+                    <h1 className="text-xl md:text-3xl font-bold text-[#5846F9] text-left mb-4">About Us</h1>
+                    <p className="text-md text-gray-700 text-left mb-4 italic">
+                        Welcome to Nexisa, your trusted partner in cutting-edge IT solutions and training. At Nexisa, we specialize in delivering comprehensive services across various domains, including:
                     </p>
                 </div>
                 <div className="flex flex-col justify-center">
-                    <div className=" text-left mb-8">
-                        
-                        <h2 className="text-2xl font-semibold mb-4 flex items-center justify-start gap-2"><CheckCircleOutlineSharpIcon
+                    <div className=" text-left mb-4"> 
+                        <h2 className="text-lg md:text-2xl font-semibold mb-2 flex items-center justify-start gap-2"><CheckCircleOutlineSharpIcon
                         />Web Development</h2>
                         <p className="text-gray-700 ml-8">
                             Crafting responsive and dynamic websites that elevate your online presence.
                         </p>
                     </div>
-                    <div className=" text-left mb-8">
-                        <h2 className="text-2xl font-semibold mb-4 flex items-center justify-start gap-2"><CheckCircleOutlineSharpIcon
+                    <div className=" text-left mb-4">
+                        <h2 className="text-lg md:text-2xl font-semibold mb-2 flex items-center justify-start gap-2"><CheckCircleOutlineSharpIcon
                         />App Development</h2>
                         <p className="text-gray-700 ml-8">
                             Building intuitive and user-friendly applications tailored to your needs.
                         </p>
                     </div>
-                    <div className="text-left mb-8">
-                        <h2 className="text-2xl font-semibold mb-4 flex items-center justify-start gap-2"><CheckCircleOutlineSharpIcon
+                    <div className="text-left mb-4">
+                        <h2 className="text-lg md:text-2xl font-semibold mb-2 flex items-center justify-start gap-2"><CheckCircleOutlineSharpIcon
                         />Data Science</h2>
                         <p className="text-gray-700 ml-8">
                             Unlocking insights and driving decisions with advanced data analytics.
                         </p>
                     </div>
-                    <div className=" text-left mb-8">
-                        <h2 className="text-2xl font-semibold mb-4 flex items-center justify-start gap-2"><CheckCircleOutlineSharpIcon
+                    <div className=" text-left mb-4">
+                        <h2 className="text-lg md:text-2xl font-semibold mb-2 flex items-center justify-start gap-2"><CheckCircleOutlineSharpIcon
                         />Training Programs</h2>
                         <p className="text-gray-700 ml-8">
                             Empowering individuals and teams with the latest tech skills to thrive in the digital world.
@@ -46,18 +44,14 @@ const AboutUs = () => {
                     </div>
                 </div>
             </div>
-
-            <div className="w-1/2 flex">
+            <div className="md:w-1/2 flex justify-center items-center">
                 <img
                     src={img}
                     alt="About Us"
-                    className="rounded-lg shadow-lg"
+                    className="rounded-lg shadow-lg w-9/12"
                 />
             </div>
-
-
         </div>
-        </section >
 
     );
 };

@@ -96,4 +96,22 @@ export const teamData = [
     name: 'SRIJITA DAS',
     role: 'Backend Developer Intern'
   },
-]
+];
+
+export const services = [
+  {
+    title: 'Training',
+    description: 'Tailored technology solutions to optimize your business operations.',
+    icon: '🛠️', // Use your preferred icon or image here
+  },
+  {
+    title: 'IT Solutions',
+    description: 'Expert-led programs to enhance your skills and knowledge.',
+    icon: '💻',
+  },
+  {
+    title: 'Digital Marketing',
+    description: 'Strategic campaigns to boost your online presence and engagement!',
+    icon: '📈',
+  },
+];

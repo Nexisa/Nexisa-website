@@ -4,7 +4,7 @@ import heroImg from '../assets/Logo/heroImg.png';
 
 function HeroSection() {
   return (
-    <section className="bg-purple-500 py-16 h-screen">
+    <section className="max-w-screen bg-[#5846F9] py-16 h-screen">
       {/* <div className="absolute inset-0 bg-gradient-to-b from-black/30 to-black/70"></div> */}
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center px-4 sm:px-6 lg:px-8 h-full">
         <div className="md:w-1/2 text-center md:text-left mb-8 md:mb-0">
@@ -19,7 +19,7 @@ function HeroSection() {
           <img
             src={heroImg} 
             alt="Digital Experience"
-            className="w-{100%} h-auto animate-float ml-28"
+            className="w-{100%} h-auto animate-float ml-25"
           />
         </div>
       </div>
