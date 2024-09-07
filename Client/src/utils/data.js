@@ -17,6 +17,15 @@ import omkar from '../assets/Team/Omkar.jpg'
 import priyanshu from '../assets/Team/Priyanshu.jpg'
 import srijita from '../assets/Team/Srijita.jpg'
 
+//gallery
+import img1 from '../assets/Gallery/img1.jpg'
+import img2 from '../assets/Gallery/img2.jpg'
+import img3 from '../assets/Gallery/img3.jpg'
+import img4 from '../assets/Gallery/img4.jpg'
+import img5 from '../assets/Gallery/img5.jpg'
+import img6 from '../assets/Gallery/img6.jpg'
+
+
 export const portfolioData = [
   {
     title: 'Hostel Booking System',
@@ -115,3 +124,30 @@ export const services = [
     icon: '📈',
   },
 ];
+
+export const galleryData = [
+  {
+      src: `${img1}`,
+      alt: 'Image 1',
+    },
+    {
+      src: `${img2}`,
+      alt: 'Image 2',
+    },
+    {
+      src: `${img3}`,
+      alt: 'Image 3',
+    },
+    {
+      src: `${img4}`,
+      alt: 'Image 4',
+    },
+    {
+      src: `${img5}`,
+      alt: 'Image 5',
+    },
+    {
+      src: `${img6}`,
+      alt: 'Image 6',
+    },
+]

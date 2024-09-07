@@ -5,3 +5,19 @@
 body {
     @apply font-times;
 }
+
+/* Custom styling for the slick dots */
+.custom-dots li button:before {
+    font-size: 12px;
+    color: #5846F9;
+    /* This changes the dots to the desired color */
+    opacity: 0.5;
+    /* Set the opacity for unselected dots */
+}
+
+.custom-dots li.slick-active button:before {
+    color: #5846F9;
+    /* Ensure active dot also uses the same color */
+    opacity: 1;
+    /* Set full opacity for the active dot */
+}

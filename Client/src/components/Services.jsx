@@ -4,7 +4,7 @@ import { services  } from '../utils/data';
 
 const ServiceSection = () => {
   return (
-    <section className="py-16 bg-[#5846F9] text-white">
+    <section id='services' className="py-16 bg-[#5846F9] text-white">
       <div className="container mx-auto text-center">
         <h2 className="text-3xl font-bold mb-4">Services</h2>
         <p className="mb-8">

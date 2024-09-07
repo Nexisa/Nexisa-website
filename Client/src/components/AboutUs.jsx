@@ -5,7 +5,7 @@ import img from '../assets/Logo/about.jpg'
 const AboutUs = () => {
     return (
 
-        <div className="container mx-auto py-12 flex gap-8 flex-col-reverse md:flex-row justify-center items-center w-full md:w-5/6">
+        <div id='about' className="container mx-auto py-12 flex gap-8 flex-col-reverse md:flex-row justify-center items-center w-full md:w-5/6">
             <div className='flex flex-col md:w-1/2 w-11/12 sm:mx-auto'>
                 <div className='flex flex-col'>
                     <h1 className="text-xl md:text-3xl font-bold text-[#5846F9] text-left mb-4">About Us</h1>
