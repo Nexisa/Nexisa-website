@@ -9,7 +9,7 @@ const Landing = () => {
   return (
     <div>
         <HeroSection/>
-        <AboutUs />
+        <AboutUs/>
         <ServiceSection />
     </div>
   )
