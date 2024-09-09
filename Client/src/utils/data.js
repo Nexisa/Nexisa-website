@@ -25,6 +25,12 @@ import img4 from '../assets/Gallery/img4.jpg'
 import img5 from '../assets/Gallery/img5.jpg'
 import img6 from '../assets/Gallery/img6.jpg'
 
+//career
+import web from '../assets/Career/web.png'
+import app from '../assets/Career/app.png'
+import ml from '../assets/Career/ml.png'
+import digital from '../assets/Career/digital.png'
+
 
 export const portfolioData = [
   {
@@ -150,4 +156,23 @@ export const galleryData = [
       src: `${img6}`,
       alt: 'Image 6',
     },
-]
+];
+
+export const careerData = [
+  {
+    title: 'Web Developer',
+    imgSrc: `${web}`,
+  },
+  {
+    title: 'App Developer',
+    imgSrc: `${app}`,
+  },
+  {
+    title: 'ML Engineer',
+    imgSrc: `${ml}`,
+  },
+  {
+    title: 'Digital Marketing',
+    imgSrc: `${digital}`,
+  },
+];

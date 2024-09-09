@@ -6,6 +6,8 @@ import PortfolioPage from './pages/PortfolioPage';
 import TeamPage from './pages/TeamPage';
 import ContactPage from './pages/ContactPage';
 import Footer from './components/Footer';
+import CareerPage from './pages/CareerPage';
+import ErrorPage from './pages/ErrorPage';
 
 function App() {
   return (
@@ -16,6 +18,8 @@ function App() {
         <Route path='/portfolio' element={<PortfolioPage/>} />
         <Route path='/team' element={<TeamPage/>} />
         <Route path='/contact' element={<ContactPage/>} />
+        <Route path='/career' element={<CareerPage/>} />
+        <Route path='*' element={<ErrorPage/>} />
       </Routes>
       <Footer/>
     </div>
