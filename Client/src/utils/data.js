@@ -17,7 +17,6 @@ import omkar from '../assets/Team/Omkar.jpg'
 import priyanshu from '../assets/Team/Priyanshu.jpg'
 import srijita from '../assets/Team/Srijita.jpg'
 import kritika from '../assets/Team/kritika.jpg'
-import sumedha from '../assets/Team/sumedha.jpg'
 
 //gallery
 import img1 from '../assets/Gallery/img1.jpg'
@@ -87,11 +86,6 @@ export const teamData = [
     imgUrl: `${kritika}`,
     name: 'KRITIKA DAS',
     role: 'ML Engineer'
-  },
-  {
-    imgUrl: `${sumedha}`,
-    name: 'SUMEDHA SARKAR',
-    role: 'Backend Developer'
   },
   {
     imgUrl: `${priya}`,
