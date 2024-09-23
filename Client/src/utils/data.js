@@ -17,14 +17,16 @@ import omkar from '../assets/Team/Omkar.jpg'
 import priyanshu from '../assets/Team/Priyanshu.jpg'
 import srijita from '../assets/Team/Srijita.jpg'
 import kritika from '../assets/Team/kritika.jpg'
+import ayush from '../assets/Team/Ayush.jpg'
+import rishav from '../assets/Team/rishav.jpg'
+import harshika from '../assets/Team/harshika.jpg'
 
 //gallery
-import img1 from '../assets/Gallery/img1.jpg'
-import img2 from '../assets/Gallery/img2.jpg'
-import img3 from '../assets/Gallery/img3.jpg'
-import img4 from '../assets/Gallery/img4.jpg'
-import img5 from '../assets/Gallery/img5.jpg'
-import img6 from '../assets/Gallery/img6.jpg'
+import dinner from '../assets/Gallery/dinner.jpg'
+import oak1 from '../assets/Gallery/oak1.jpg'
+import sharecab from '../assets/Gallery/sharecabz.jpg'
+import oak2 from '../assets/Gallery/oak2.jpg'
+import itc from '../assets/Gallery/itc.jpg'
 
 //career
 import web from '../assets/Career/web.png'
@@ -70,7 +72,7 @@ export const teamData = [
   {
     imgUrl: `${puja}`,
     name: 'PUJA MONDAL',
-    role: 'HR Manager, Front-End Developer'
+    role: 'HR Manager'
   },
   {
     imgUrl: `${simpy}`,
@@ -108,6 +110,16 @@ export const teamData = [
     role: 'Front-End Developer Intern'
   },
   {
+    imgUrl: `${harshika}`,
+    name: 'HARSHIKA SINGH',
+    role: 'UI/UX Designer'
+  },
+  {
+    imgUrl: `${ayush}`,
+    name: 'AAYUSH KUMAR',
+    role: 'Full-Stack Developer Intern'
+  },
+  {
     imgUrl: `${priyanshu}`,
     name: 'PRIYANSHU DEY',
     role: 'Backend Developer Intern'
@@ -117,6 +129,11 @@ export const teamData = [
     name: 'SRIJITA DAS',
     role: 'Backend Developer Intern'
   },
+  {
+    imgUrl: `${rishav}`,
+    name: 'RISHAV MUKHERJEE',
+    role: 'App Developer Intern'
+  }
 ];
 
 export const services = [
@@ -139,29 +156,29 @@ export const services = [
 
 export const galleryData = [
   {
-      src: `${img1}`,
+      src: `${dinner}`,
       alt: 'Image 1',
     },
     {
-      src: `${img2}`,
+      src: `${itc}`,
       alt: 'Image 2',
     },
     {
-      src: `${img3}`,
+      src: `${oak2}`,
       alt: 'Image 3',
     },
     {
-      src: `${img4}`,
+      src: `${oak1}`,
       alt: 'Image 4',
     },
     {
-      src: `${img5}`,
+      src: `${sharecab}`,
       alt: 'Image 5',
     },
-    {
-      src: `${img6}`,
-      alt: 'Image 6',
-    },
+    // {
+    //   src: `${img6}`,
+    //   alt: 'Image 6',
+    // },
 ];
 
 export const careerData = [

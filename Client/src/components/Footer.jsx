@@ -6,7 +6,7 @@ import { FaLinkedin } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <footer className="bg-gradient-to-r from-[#5846F9] to-[#6251f9] text-white py-10">
+    <footer className="bg-gradient-to-r from-[#a9a1f6] via-[#8577fa] to-[#6251f9] text-white py-10">
       <div className="w-11/12 md:w-9/12 container mx-auto flex flex-col md:flex-row justify-between items-center">
         {/* Left Section */}
         <div className="w-11/12 mx-auto md:w-1/3 text-center md:text-left mb-6 md:mb-0">
@@ -58,7 +58,7 @@ const Footer = () => {
 
       {/* Copyright */}
       <div className="text-center mt-8">
-        <p className="text-lg">&copy; Copyright <span className="font-semibold">Nexisa</span> All Rights Reserved</p>
+        <p className="text-lg">&copy; 2024 <span className="font-semibold">Nexisa <br /></span> All Rights Reserved</p>
       </div>
     </footer>
   );
