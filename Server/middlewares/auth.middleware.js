@@ -1,4 +1,3 @@
-// middlewares/auth.middleware.js
 const jwt = require("jsonwebtoken");
 
 const authMiddleware = (roles = []) => {
@@ -10,8 +9,7 @@ const authMiddleware = (roles = []) => {
         .json({ message: "No token, authorization denied" });
     }
 
-    // Extract the token from the Authorization header
-    const token = authHeader.split(" ")[1]; // Assuming 'Bearer <token>' format
+    const token = authHeader.split(" ")[1];
     if (!token) {
       return res
         .status(401)

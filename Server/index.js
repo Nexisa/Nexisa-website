@@ -6,9 +6,10 @@ const cors = require("cors");
 const authRoutes = require("./routes/auth.routes");
 const employeeRoutes = require("./routes/employee.routes");
 const adminRoutes = require("./routes/admin.routes");
+const { cloudinaryConnect } = require("./config/cloudinary");
 //********************************database connection********************************
 connectDB();
-
+cloudinaryConnect();
 //********************************middlewares********************************
 const app = express();
 app.use(express.json());
