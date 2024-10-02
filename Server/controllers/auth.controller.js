@@ -22,13 +22,18 @@ exports.login = async (req, res) => {
       { id: user._id, role: user.role },
       process.env.JWT_SECRET,
       {
-        expiresIn: "1d",
+        expiresIn: "72h",
       }
     );
 
-    res.json({
+    user.token = token;
+
+    const options = {
+      expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
+      httpOnly: true,
+    };
+    res.cookie("token", token, options).status(200).json({
       success: true,
-      message: "Logged in successfully",
       token,
       user: {
         id: user._id,
@@ -37,12 +42,64 @@ exports.login = async (req, res) => {
         role: user.role,
       },
       role: user.role,
+      message: `User Login Success`,
     });
   } catch (error) {
     console.error("Login error:", error);
     res
       .status(500)
       .json({ success: false, message: "Server error", error: error.message });
+  }
+};
+
+//signup for user
+exports.signup = async (req, res) => {
+  try {
+    const { name, email, password, phone, role } =
+      req.body;
+
+    if (
+      !name ||
+      !phone ||
+      !email ||
+      !password
+    ) {
+      return res.status(403).json({
+        success: false,
+        message: "All Fields are required",
+      });
+    }
+
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({
+        success: false,
+        message: "User already exists. Please sign in to continue.",
+      });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const user = await User.create({
+      name: name,
+      phone: phone,
+      email: email,
+      password: hashedPassword,
+      profilePicture: `https://api.dicebear.com/5.x/initials/svg?seed=${name}`,
+      role: role,
+    });
+
+    return res.status(200).json({
+      success: true,
+      user,
+      message: "User registered successfully",
+    });
+  } catch (error) {
+    console.error("SignUp error --> ", error);
+    return res.status(500).json({
+      success: false,
+      message: "User cannot be registered. Please try again.",
+    });
   }
 };
 

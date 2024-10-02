@@ -14,13 +14,13 @@ const UserDashBoard = () => {
             <div className='md:w-1/2 w-11/12 mx-auto flex flex-col gap-10 justify-center items-center'>
                 <h1 className='text-4xl font-semibold text-left'>Welcome User,</h1>
                 <div className='grid md:grid-cols-2 grid-cols-1 gap-5 w-full'>
-                    <Link to='/leave-application'>
+                    <Link to='/user/leave-application'>
                         <div className='bg-[#5846F9] text-white p-4 rounded-xl text-center cursor-pointer'>Leave Application</div>
                     </Link>
-                    <Link to='/salary-slip'>
+                    <Link to='/user/salary-slip'>
                         <div className='bg-[#5846F9] text-white p-4 rounded-xl text-center cursor-pointer'>Salary Slip</div>
                     </Link>
-                    <Link to='/account'>
+                    <Link to='/user/account-info'>
                         <div className='bg-[#5846F9] text-white p-4 rounded-xl text-center cursor-pointer'>Account Information</div>
                     </Link>
                     <div className='bg-[#5846F9] text-white p-4 rounded-xl text-center cursor-pointer'>Logout</div>

@@ -2,6 +2,8 @@
 
 import { useState } from "react"
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"
+import { useNavigate } from "react-router-dom"
+import axios from "axios";
 
 const SigninForm = () => {
 
@@ -12,10 +14,23 @@ const SigninForm = () => {
 
   const [showPassword, setShowPassword] = useState(false)
 
-  const { username, password } = formData;
+  const { email, password } = formData;
+  const navigate = useNavigate()
 
-  const handleOnSubmit = () => {
-
+  const handleOnSubmit = (e) => {
+        e.preventDefault();
+        axios.post('http://localhost:3000/api/auth/signin', formData)
+        .then(result => {
+            if(result.data.success){
+                console.log(result.data);
+                localStorage.setItem("token",result.data.token);
+                navigate(`/`);
+            }
+            else{
+                alert(result.data.message);
+            }
+        })
+        .catch(err => console.log(err))
   }
 
   const handleOnChange = (e) => {
@@ -31,13 +46,13 @@ const SigninForm = () => {
     >
         <label className="w-full">
             <p className="mb-1 text-white font-semibold">
-                Username <sup className="text-red-600 text-md">*</sup>
+                Email <sup className="text-red-600 text-md">*</sup>
             </p>
             <input
                 required
                 type="text"
                 name="username"
-                value={username}
+                value={email}
                 onChange={handleOnChange}
                 placeholder="Enter your username"
                 className="form-style w-full p-2 rounded-lg"

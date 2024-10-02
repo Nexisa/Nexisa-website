@@ -14,6 +14,7 @@ import AdminDashboard from './pages/Admin/AdminDashboard';
 import LeaveApplication from './pages/User/LeaveApplication';
 import SalarySlip from './pages/User/SalarySlip';
 import AccountInfo from './pages/User/AccountInfo';
+import PrivateRoute from './components/PrivateRoute';
 
 function App() {
   return (
@@ -26,11 +27,31 @@ function App() {
         <Route path='/contact' element={<ContactPage/>} />
         <Route path='/career' element={<CareerPage/>} />
         <Route path='/signin' element={<Signin />} />
-        <Route path='/user' element={<UserDashBoard />} />
-        <Route path='/admin' element={<AdminDashboard />} />
-        <Route path='/user/leave-application' element={<LeaveApplication />} />
-        <Route path='/user/salary-slip' element={<SalarySlip />} />
-        <Route path='/user/account-info' element={<AccountInfo />} />
+        <Route path='/user' element={
+          <PrivateRoute>
+            <UserDashBoard />
+          </PrivateRoute>
+        } />
+        <Route path='user/leave-application' element={
+          <PrivateRoute>
+            <LeaveApplication />
+          </PrivateRoute>
+        } />
+        <Route path='user/salary-slip' element={
+          <PrivateRoute>
+            <SalarySlip />
+          </PrivateRoute>
+        } />
+        <Route path='user/account-info' element={
+          <PrivateRoute>
+            <AccountInfo />
+          </PrivateRoute>
+        } />
+        <Route path='/admin' element={
+          <PrivateRoute>
+            <AdminDashboard />
+          </PrivateRoute>
+        } />
         <Route path='*' element={<ErrorPage/>} />
       </Routes>
       <Footer/>

@@ -2,6 +2,7 @@ const express = require("express");
 const {
   login,
   registerAdmin,
+  signup,
   logout,
 } = require("../controllers/auth.controller");
 const authMiddleware = require("../middlewares/auth.middleware");
@@ -9,6 +10,9 @@ const router = express.Router();
 
 //route for login
 router.post("/signin", login);
+
+//route for signup
+router.post("/signup", signup);
 
 // Admin registration (admin only)
 router.post("/register-admin", registerAdmin);

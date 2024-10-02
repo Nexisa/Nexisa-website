@@ -19,6 +19,7 @@ const userSchema = new mongoose.Schema(
     role: {
       type: String,
       enum: ["employee", "admin"],
+      default: "employee",
       required: true,
     },
     profilePicture: {
@@ -27,6 +28,9 @@ const userSchema = new mongoose.Schema(
     phone: {
       type: String,
     },
+    token: { 
+      type: String 
+    }
   },
   { timestamps: true }
 );
