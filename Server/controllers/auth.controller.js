@@ -7,11 +7,16 @@ exports.login = async (req, res) => {
   const { email, password } = req.body;
   try {
     const user = await User.findOne({ email });
-    if (!user) return res.status(404).json({ message: "User not found" });
+    if (!user)
+      return res
+        .status(404)
+        .json({ success: false, message: "User not found" });
 
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch)
-      return res.status(400).json({ message: "Invalid credentials" });
+      return res
+        .status(400)
+        .json({ success: false, message: "Invalid credentials" });
 
     const token = jwt.sign(
       { id: user._id, role: user.role },
@@ -22,6 +27,8 @@ exports.login = async (req, res) => {
     );
 
     res.json({
+      success: true,
+      message: "Logged in successfully",
       token,
       user: {
         id: user._id,
@@ -33,7 +40,9 @@ exports.login = async (req, res) => {
     });
   } catch (error) {
     console.error("Login error:", error);
-    res.status(500).json({ message: "Server error", error: error.message });
+    res
+      .status(500)
+      .json({ success: false, message: "Server error", error: error.message });
   }
 };
 
@@ -44,7 +53,9 @@ exports.registerAdmin = async (req, res) => {
 
     let admin = await User.findOne({ email, role: "admin" });
     if (admin) {
-      return res.status(400).json({ message: "Admin already exists" });
+      return res
+        .status(400)
+        .json({ success: false, message: "Admin already exists" });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -57,10 +68,14 @@ exports.registerAdmin = async (req, res) => {
     });
 
     await admin.save();
-    res.status(200).json({ message: "Admin registered successfully" });
+    res
+      .status(200)
+      .json({ success: true, message: "Admin registered successfully" });
   } catch (error) {
     console.error("Admin registration error:", error);
-    res.status(500).json({ message: "Server error", error: error.message });
+    res
+      .status(500)
+      .json({ success: false, message: "Server error", error: error.message });
   }
 };
 
@@ -70,9 +85,11 @@ exports.logout = async (req, res) => {
     // Get the token from the request headers
     const token = req.header("Authorization").replace("Bearer ", "");
 
-    res.status(200).json({ message: "Logged out successfully" });
+    res.status(200).json({ success: true, message: "Logged out successfully" });
   } catch (error) {
     console.error("Logout error:", error);
-    res.status(500).json({ message: "Server error", error: error.message });
+    res
+      .status(500)
+      .json({ success: false, message: "Server error", error: error.message });
   }
 };

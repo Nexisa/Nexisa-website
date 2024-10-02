@@ -1,5 +1,6 @@
 const express = require("express");
-
+const multer = require("multer");
+const upload = multer({ dest: "uploads/" }); // Store files in the "uploads" directory temporarily
 const {
   updateProfile,
   applyLeave,
@@ -16,6 +17,7 @@ router.put("/profile", authMiddleware(["employee"]), updateProfile);
 router.put(
   "/profile-picture",
   authMiddleware(["employee"]),
+  upload.single("profilePicture"), // This extracts the uploaded image from the request
   updateProfilePicture
 );
 
