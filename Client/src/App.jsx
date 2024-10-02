@@ -9,8 +9,9 @@ import Footer from './components/Footer';
 import CareerPage from './pages/CareerPage';
 import ErrorPage from './pages/ErrorPage';
 import Signin from './pages/Signin';
-import UserDashBoard from './pages/UserDashBoard';
-import AdminDashboard from './pages/AdminDashboard';
+import UserDashBoard from './pages/User/UserDashboard';
+import AdminDashboard from './pages/Admin/AdminDashboard';
+import LeaveApplication from './pages/User/LeaveApplication';
 
 function App() {
   return (
@@ -23,8 +24,9 @@ function App() {
         <Route path='/contact' element={<ContactPage/>} />
         <Route path='/career' element={<CareerPage/>} />
         <Route path='/signin' element={<Signin />} />
-        <Route path='/user-dashboard' element={<UserDashBoard />} />
-        <Route path='/admin-dashboard' element={<AdminDashboard />} />
+        <Route path='/user' element={<UserDashBoard />} />
+        <Route path='/admin' element={<AdminDashboard />} />
+        <Route path='/user/leave-application' element={<LeaveApplication />} />
         <Route path='*' element={<ErrorPage/>} />
       </Routes>
       <Footer/>
