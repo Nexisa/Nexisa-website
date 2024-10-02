@@ -12,6 +12,7 @@ import Signin from './pages/Signin';
 import UserDashBoard from './pages/User/UserDashboard';
 import AdminDashboard from './pages/Admin/AdminDashboard';
 import LeaveApplication from './pages/User/LeaveApplication';
+import SalarySlip from './pages/User/SalarySlip';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route path='/user' element={<UserDashBoard />} />
         <Route path='/admin' element={<AdminDashboard />} />
         <Route path='/user/leave-application' element={<LeaveApplication />} />
+        <Route path='/user/salary-slip' element={<SalarySlip />} />
         <Route path='*' element={<ErrorPage/>} />
       </Routes>
       <Footer/>

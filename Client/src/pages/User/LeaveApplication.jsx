@@ -25,18 +25,17 @@ const LeaveApplication = () => {
                 onSubmit={handleSubmit} 
                 className="bg-white shadow-lg rounded-lg p-8 w-full"
             >
-                
                 {/* Leave Reason */}
                 <textarea
-                className="w-full h-32 p-4 mb-8 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-[#5846F9] shadow-custom placeholder-gray-400"
+                className="w-full md:h-32 h-48 p-4 mb-8 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-[#5846F9] shadow-custom placeholder-gray-400"
                 placeholder="Leave Reason"
                 value={leaveReason}
                 onChange={(e) => setLeaveReason(e.target.value)}
                 />
 
-                <div className="flex justify-between items-center mb-6 w-7/12 mx-auto">
+                <div className="flex flex-col md:flex-row justify-between gap-10 md:gap-0 items-center mb-8 md:w-7/12 w-11/12 mx-auto">
                     {/* From Date Picker */}
-                    <div className='bg-[#5846F9] relative px-2 py-2 w-[30%] rounded-2xl'>
+                    <div className='bg-[#5846F9] relative px-2 py-2 md:w-[30%] rounded-2xl'>
                         <div className='pl-5 text-white'>
                             <label htmlFor="fromdate">From</label>
                         </div>
@@ -56,7 +55,7 @@ const LeaveApplication = () => {
                     </div>
 
                     {/* To Date Picker */}
-                    <div className='bg-[#5846F9] relative px-2 py-2 w-[30%] rounded-2xl'>
+                    <div className='bg-[#5846F9] relative px-2 py-2 md:w-[30%] rounded-2xl'>
                         <div className='pl-5 text-white'>
                             <label htmlFor="todate">To</label>
                         </div>
@@ -66,7 +65,7 @@ const LeaveApplication = () => {
                                 onChange={(date) => setToDate(date)}
                                 dateFormat="dd/MM/yyyy"
                                 placeholderText="DD/MM/YYYY"
-                                minDate={new Date()}
+                                minDate={fromDate}
                                 name='todate'
                                 className='w-[70%] pl-3 bg-[#5846F9] rounded-b-2xl text-white 
                                 placeholder-white focus:outline-none'
@@ -80,7 +79,7 @@ const LeaveApplication = () => {
                 <div className="text-center">
                 <button 
                     type="submit"
-                    className="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="px-12 py-2 bg-[#5846F9] text-white rounded-lg hover:bg-[#402cf7] focus:outline-none focus:ring-2 focus:ring-blue-500"
                 >
                     Submit
                 </button>
