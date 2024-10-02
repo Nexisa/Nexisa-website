@@ -3,7 +3,9 @@ require("dotenv").config();
 const connectDB = require("./config/database");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
-
+const authRoutes = require("./routes/auth.routes");
+const employeeRoutes = require("./routes/employee.routes");
+const adminRoutes = require("./routes/admin.routes");
 //********************************database connection********************************
 connectDB();
 
@@ -18,6 +20,10 @@ app.use(
   })
 );
 
+//********************************routes********************************
+app.use("/api/auth", authRoutes); // Authentication routes
+app.use("/api/employee", employeeRoutes); // Employee specific routes
+app.use("/api/admin", adminRoutes); // Admin specific routes
 //********************************start server********************************
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
