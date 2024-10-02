@@ -8,12 +8,16 @@ exports.updateProfile = async (req, res) => {
   const userId = req.user.id;
   try {
     const user = await User.findById(userId);
-    if (!user) return res.status(404).json({ message: "User not found" });
+    if (!user)
+      return res
+        .status(404)
+        .json({ success: false, message: "User not found" });
 
     user.phone = phone || user.phone;
     await user.save();
 
     res.json({
+      success: true,
       message: "Profile updated successfully",
       user: {
         id: user._id,
@@ -25,7 +29,9 @@ exports.updateProfile = async (req, res) => {
     });
   } catch (error) {
     console.error("Profile update error:", error);
-    res.status(500).json({ message: "Server error", error: error.message });
+    res
+      .status(500)
+      .json({ success: false, message: "Server error", error: error.message });
   }
 };
 
@@ -34,11 +40,16 @@ exports.updateProfilePicture = async (req, res) => {
   const userId = req.user.id;
   try {
     if (!req.files.image) {
-      return res.status(400).json({ message: "No image data provided" });
+      return res
+        .status(400)
+        .json({ success: false, message: "No image data provided" });
     }
 
     const user = await User.findById(userId);
-    if (!user) return res.status(404).json({ message: "User not found" });
+    if (!user)
+      return res
+        .status(404)
+        .json({ success: false, message: "User not found" });
 
     // Upload base64 image to Cloudinary
     const upload = await uploadImage(req.files.image);
@@ -47,12 +58,15 @@ exports.updateProfilePicture = async (req, res) => {
     await user.save();
 
     res.json({
+      success: true,
       message: "Profile picture updated successfully",
       profilePicture: user.profilePicture,
     });
   } catch (error) {
     console.error("Profile picture update error:", error);
-    res.status(500).json({ message: "Server error", error: error.message });
+    res
+      .status(500)
+      .json({ success: false, message: "Server error", error: error.message });
   }
 };
 
@@ -69,11 +83,14 @@ exports.applyLeave = async (req, res) => {
     });
     await newLeave.save();
     res.json({
+      success: true,
       message: "Leave application submitted successfully",
       leaveApplication: newLeave,
     });
   } catch (error) {
     console.error("Leave application error:", error);
-    res.status(500).json({ message: "Server error", error: error.message });
+    res
+      .status(500)
+      .json({ success: false, message: "Server error", error: error.message });
   }
 };

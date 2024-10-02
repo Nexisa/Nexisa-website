@@ -6,9 +6,9 @@ const bcrypt = require("bcrypt");
 exports.getAllEmployees = async (req, res) => {
   try {
     const employees = await User.find({ role: "employee" });
-    res.json(employees);
+    res.json({ success: true, employees });
   } catch (error) {
-    res.status(500).json({ message: "Server error" });
+    res.status(500).json({ success: false, message: "Server error" });
   }
 };
 
@@ -19,9 +19,9 @@ exports.getAllLeaveApplications = async (req, res) => {
       "user",
       "name email"
     );
-    res.json(leaveApplications);
+    res.json({ success: true, leaveApplications });
   } catch (error) {
-    res.status(500).json({ message: "Server error" });
+    res.status(500).json({ success: false, message: "Server error" });
   }
 };
 
@@ -31,14 +31,16 @@ exports.manageLeaveApplication = async (req, res) => {
   try {
     const leaveApplication = await LeaveApplication.findById(leaveId);
     if (!leaveApplication)
-      return res.status(404).json({ message: "Leave application not found" });
+      return res
+        .status(404)
+        .json({ success: false, message: "Leave application not found" });
 
     leaveApplication.status = status;
     await leaveApplication.save();
 
-    res.json({ message: `Leave application ${status}` });
+    res.json({ success: true, message: `Leave application ${status}` });
   } catch (error) {
-    res.status(500).json({ message: "Server error" });
+    res.status(500).json({ success: false, message: "Server error" });
   }
 };
 
@@ -54,9 +56,9 @@ exports.addSalarySlip = async (req, res) => {
     });
     await newSlip.save();
 
-    res.json({ message: "Salary slip added successfully" });
+    res.json({ success: true, message: "Salary slip added successfully" });
   } catch (error) {
-    res.status(500).json({ message: "Server error" });
+    res.status(500).json({ success: false, message: "Server error" });
   }
 };
 
@@ -66,7 +68,9 @@ exports.addEmployee = async (req, res) => {
   try {
     const existingUser = await User.findOne({ email });
     if (existingUser)
-      return res.status(400).json({ message: "Email already exists" });
+      return res
+        .status(400)
+        .json({ success: false, message: "Email already exists" });
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -80,9 +84,11 @@ exports.addEmployee = async (req, res) => {
     });
     await newUser.save();
 
-    res.json({ message: "Employee added successfully" });
+    res.json({ success: true, message: "Employee added successfully" });
   } catch (error) {
     console.error("Add employee error:", error);
-    res.status(500).json({ message: "Server error", error: error.message });
+    res
+      .status(500)
+      .json({ success: false, message: "Server error", error: error.message });
   }
 };
