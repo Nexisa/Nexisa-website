@@ -13,6 +13,7 @@ import UserDashBoard from './pages/User/UserDashboard';
 import AdminDashboard from './pages/Admin/AdminDashboard';
 import LeaveApplication from './pages/User/LeaveApplication';
 import SalarySlip from './pages/User/SalarySlip';
+import AccountInfo from './pages/User/AccountInfo';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
         <Route path='/admin' element={<AdminDashboard />} />
         <Route path='/user/leave-application' element={<LeaveApplication />} />
         <Route path='/user/salary-slip' element={<SalarySlip />} />
+        <Route path='/user/account-info' element={<AccountInfo />} />
         <Route path='*' element={<ErrorPage/>} />
       </Routes>
       <Footer/>

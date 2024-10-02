@@ -199,3 +199,14 @@ export const careerData = [
     imgSrc: `${digital}`,
   },
 ];
+
+export const dummyData = [
+    {
+        month: 'January',
+        url: `${asham}`
+    },
+    {
+      month: 'February',
+      url: `${khushi}`
+    }
+]

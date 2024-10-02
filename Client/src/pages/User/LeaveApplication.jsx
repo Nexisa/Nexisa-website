@@ -79,7 +79,7 @@ const LeaveApplication = () => {
                 <div className="text-center">
                 <button 
                     type="submit"
-                    className="px-12 py-2 bg-[#5846F9] text-white rounded-lg hover:bg-[#402cf7] focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="px-12 py-2 bg-[#5846F9] text-white rounded-lg hover:bg-[#402cf7] focus:outline-none focus:ring-2 focus:ring-[#5846F9]"
                 >
                     Submit
                 </button>
