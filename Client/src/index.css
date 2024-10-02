@@ -21,3 +21,57 @@ body {
     opacity: 1;
     /* Set full opacity for the active dot */
 }
+
+
+/* LeaveApplication.css */
+
+/* Customize the calendar popper (dropdown) */
+.react-datepicker-popper {
+    z-index: 20;
+    /* Ensure it's above other elements */
+}
+
+.react-datepicker__header {
+    background-color: #4F46E5;
+    /* Custom blue background */
+    border-bottom: none;
+    /* Remove bottom border */
+}
+
+.react-datepicker__current-month,
+.react-datepicker__day-name {
+    color: #fff;
+    /* White text for the header and day names */
+}
+
+.react-datepicker__day {
+    color: #333;
+    /* Dark text for days */
+    border-radius: 50%;
+    /* Make the days circular */
+}
+
+.react-datepicker__day--selected {
+    background-color: #4F46E5;
+    /* Highlight selected date */
+    color: #fff;
+    /* White text on selected day */
+}
+
+.react-datepicker__day:hover {
+    background-color: #6366F1;
+    /* Darken on hover */
+    color: white;
+    /* White text on hover */
+}
+
+.react-datepicker__navigation--next,
+.react-datepicker__navigation--previous {
+    border-color: #fff;
+    /* White arrows */
+}
+
+.react-datepicker__triangle {
+    display: none;
+    /* Remove the triangle pointing to the input */
+}

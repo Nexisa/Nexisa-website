@@ -1,6 +1,6 @@
 // import React from 'react'
 import { Link } from 'react-router-dom'
-import image from '../assets/Logo/about.jpg'
+import image from '../../assets/Logo/about.jpg'
 
 const UserDashBoard = () => {
   return (
