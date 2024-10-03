@@ -7,6 +7,11 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    employeeId: {
+      type: String,
+      required: true,
+      unique: true,
+    },
     email: {
       type: String,
       required: true,
@@ -28,9 +33,9 @@ const userSchema = new mongoose.Schema(
     phone: {
       type: String,
     },
-    token: { 
-      type: String 
-    }
+    token: {
+      type: String,
+    },
   },
   { timestamps: true }
 );

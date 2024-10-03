@@ -1,5 +1,7 @@
 // routes/admin.routes.js
 const express = require("express");
+const multer = require("multer");
+const upload = multer({ dest: "uploads/" });
 const {
   getAllEmployees,
   getAllLeaveApplications,
@@ -23,7 +25,7 @@ router.get("/leave-applications", getAllLeaveApplications);
 router.put("/manage-leave", manageLeaveApplication);
 
 // route for adding salary slip
-router.post("/add-salary-slip", addSalarySlip);
+router.post("/add-salary-slip", upload.single("fileUrl"), addSalarySlip);
 
 // route for adding employee
 router.post("/add-employee", addEmployee);
