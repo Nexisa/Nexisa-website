@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import axios from "../api/axios";
 
 const SigninForm = () => {
   const [formData, setFormData] = useState({
@@ -17,7 +17,7 @@ const SigninForm = () => {
   const handleOnSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:3000/api/auth/signin", formData)
+      .post("/auth/signin", formData)
       .then((result) => {
         if (result.data.success) {
           console.log(result.data);
@@ -52,7 +52,7 @@ const SigninForm = () => {
           name="email"
           value={email}
           onChange={handleOnChange}
-          placeholder="Enter your username"
+          placeholder="Enter your email"
           className="form-style w-full p-2 rounded-lg"
         />
       </label>
