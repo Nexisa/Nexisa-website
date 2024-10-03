@@ -2,18 +2,42 @@ import { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { FiCalendar } from 'react-icons/fi';
+import axios from '../../api/axios'
 
 const LeaveApplication = () => {
-  const [leaveReason, setLeaveReason] = useState('');
-  const [fromDate, setFromDate] = useState(null);
-  const [toDate, setToDate] = useState(null);
+  const [reason, setReason] = useState('');
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
 
 
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log({ leaveReason, fromDate, toDate });
-    // Implement form submission logic here
+
+    const leaveData = {
+        reason,
+        startDate,
+        endDate
+    };
+
+    try {
+      const token = localStorage.getItem('token');
+      const response = await axios.post('/employee/leave', leaveData, {
+        headers: {
+          Authorization: `Bearer ${token}`, // Include the token in the request header
+        },
+      });
+      console.log(response.data);  // Log response for debugging
+      
+      // Clear form fields after successful submission
+      setReason('');
+      setStartDate(null);
+      setEndDate(null);
+      
+      // Optionally handle success (e.g., display a success message)
+    } catch (error) {
+      console.error(error);  // Log error for debugging
+      // Optionally handle error (e.g., display an error message)
+    }
   };
 
   return (
@@ -26,11 +50,11 @@ const LeaveApplication = () => {
                 className="bg-white shadow-lg rounded-lg p-8 w-full"
             >
                 {/* Leave Reason */}
-                <textarea
+                <textarea name='reason'
                 className="w-full md:h-32 h-48 p-4 mb-8 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-[#5846F9] shadow-custom placeholder-gray-400"
                 placeholder="Leave Reason"
-                value={leaveReason}
-                onChange={(e) => setLeaveReason(e.target.value)}
+                value={reason}
+                onChange={(e) => setReason(e.target.value)}
                 />
 
                 <div className="flex flex-col md:flex-row justify-between gap-10 md:gap-0 items-center mb-8 md:w-7/12 w-11/12 mx-auto">
@@ -41,12 +65,12 @@ const LeaveApplication = () => {
                         </div>
                         <div>
                             <DatePicker
-                                selected={fromDate}
-                                onChange={(date) => setFromDate(date)}
+                                selected={startDate}
+                                onChange={(date) => setStartDate(date)}
                                 dateFormat="dd/MM/yyyy"
                                 placeholderText="DD/MM/YYYY"
                                 minDate={new Date()}
-                                name='fromdate'
+                                name='startDate'
                                 className='w-[70%] pl-3 bg-[#5846F9] rounded-b-2xl text-white 
                                 placeholder-white focus:outline-none'
                             />
@@ -61,12 +85,12 @@ const LeaveApplication = () => {
                         </div>
                         <div>
                             <DatePicker
-                                selected={toDate}
-                                onChange={(date) => setToDate(date)}
+                                selected={endDate}
+                                onChange={(date) => setEndDate(date)}
                                 dateFormat="dd/MM/yyyy"
                                 placeholderText="DD/MM/YYYY"
-                                minDate={fromDate}
-                                name='todate'
+                                minDate={startDate}
+                                name='endDate'
                                 className='w-[70%] pl-3 bg-[#5846F9] rounded-b-2xl text-white 
                                 placeholder-white focus:outline-none'
                             />

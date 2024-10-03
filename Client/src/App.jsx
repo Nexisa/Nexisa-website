@@ -15,6 +15,8 @@ import LeaveApplication from './pages/User/LeaveApplication';
 import SalarySlip from './pages/User/SalarySlip';
 import AccountInfo from './pages/User/AccountInfo';
 import PrivateRoute from './components/PrivateRoute';
+import Leave from './pages/Admin/Leave';
+import Employees from './pages/Admin/Employees';
 
 function App() {
   return (
@@ -50,6 +52,16 @@ function App() {
         <Route path='/admin' element={
           <PrivateRoute>
             <AdminDashboard />
+          </PrivateRoute>
+        } />
+        <Route path='/admin/leave-applications' element={
+          <PrivateRoute>
+            <Leave />
+          </PrivateRoute>
+        } />
+        <Route path='/admin/employees' element={
+          <PrivateRoute>
+            <Employees />
           </PrivateRoute>
         } />
         <Route path='*' element={<ErrorPage/>} />

@@ -25,7 +25,6 @@ const AccountInfo = () => {
             Authorization: `Bearer ${localStorage.getItem('token')}`, // Assuming you have token stored in localStorage
           },
         });
-        console.log("yha tk chl rha")
         const userData = response.data.user;
         console.log(response.data);
         setUserDetails({
@@ -97,8 +96,8 @@ const AccountInfo = () => {
                 {imageURL ? (
                   <img src={imageURL} alt="Profile" className="md:w-52 h-60 rounded-2xl mb-4" />
                 ) : (
-                  <div className="md:w-52 h-60 rounded-full bg-gray-200 mb-4 flex items-center justify-center">
-                    <span>No Image</span>
+                  <div className="w-52 h-60 rounded-2xl bg-gray-200 mb-4 flex items-center justify-center">
+                    <span className='text-xl'>No Image</span>
                   </div>
                 )}
                 <button onClick={() => setShowImageModal(true)} className="mt-2 bg-[#5846F9] text-white px-8 py-2 rounded-full">
