@@ -2,9 +2,9 @@ const User = require("../models/User");
 const LeaveApplication = require("../models/LeaveApplication");
 const { uploadImage } = require("../services/CloudinaryService");
 
-//controller for updating the user profile (working on it not completed yet)
+// controller for updating the user profile (working on it not completed yet)
 exports.updateProfile = async (req, res) => {
-  const {name, phone, email, password } = req.body;
+  const { name, phone, email, password } = req.body;
   const userId = req.user._id;
   // console.log(userId)
   try {
@@ -13,15 +13,17 @@ exports.updateProfile = async (req, res) => {
       return res
         .status(404)
         .json({ success: false, message: "User not found" });
-      
+
     let hashedPassword = user.password;
 
-    password ? hashedPassword = await bcrypt.hash(password, 10) : hashedPassword = user.password;
+    password
+      ? (hashedPassword = await bcrypt.hash(password, 10))
+      : (hashedPassword = user.password);
 
     user.phone = phone || user.phone;
     user.name = name || user.name;
     user.email = email || user.email;
-    if(hashedPassword) user.password = hashedPassword || user.password;
+    if (hashedPassword) user.password = hashedPassword || user.password;
     await user.save();
 
     res.json({
@@ -99,25 +101,26 @@ exports.applyLeave = async (req, res) => {
   }
 };
 
+// get user by id
 exports.getUserById = async (req, res) => {
   try {
     const userId = req.user._id.toString();
     const user = await User.findById(userId);
-    
-    if(!user){
+
+    if (!user) {
       return res.status(404).json({
-        success:false,
-        message:'User is not found'
-      })
+        success: false,
+        message: "User is not found",
+      });
     }
 
     res.status(200).json({
       success: true,
-      user
+      user,
     });
   } catch (error) {
     res
       .status(500)
       .json({ success: false, message: "Error fetching user", error });
   }
-}
+};

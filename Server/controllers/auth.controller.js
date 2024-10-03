@@ -32,18 +32,21 @@ exports.login = async (req, res) => {
       expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
       httpOnly: true,
     };
-    res.cookie("token", token, options).status(200).json({
-      success: true,
-      token,
-      user: {
-        id: user._id,
-        name: user.name,
-        email: user.email,
+    res
+      .cookie("token", token, options)
+      .status(200)
+      .json({
+        success: true,
+        token,
+        user: {
+          id: user._id,
+          name: user.name,
+          email: user.email,
+          role: user.role,
+        },
         role: user.role,
-      },
-      role: user.role,
-      message: `User Login Success`,
-    });
+        message: `User Login Success`,
+      });
   } catch (error) {
     console.error("Login error:", error);
     res
@@ -55,15 +58,9 @@ exports.login = async (req, res) => {
 //signup for user
 exports.signup = async (req, res) => {
   try {
-    const { name, email, password, phone, role } =
-      req.body;
+    const { name, email, password, phone } = req.body;
 
-    if (
-      !name ||
-      !phone ||
-      !email ||
-      !password
-    ) {
+    if (!name || !phone || !email || !password) {
       return res.status(403).json({
         success: false,
         message: "All Fields are required",
@@ -86,7 +83,6 @@ exports.signup = async (req, res) => {
       email: email,
       password: hashedPassword,
       profilePicture: `https://api.dicebear.com/5.x/initials/svg?seed=${name}`,
-      role: role,
     });
 
     return res.status(200).json({
