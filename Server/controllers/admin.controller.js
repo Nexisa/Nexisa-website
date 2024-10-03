@@ -2,6 +2,9 @@ const User = require("../models/User");
 const LeaveApplication = require("../models/LeaveApplication");
 const SalarySlip = require("../models/SalarySlip");
 const bcrypt = require("bcrypt");
+const { uploadImage } = require("../services/CloudinaryService");
+const { v4: uuidv4 } = require("uuid");
+
 // Admin can view all employees
 exports.getAllEmployees = async (req, res) => {
   try {
@@ -46,23 +49,40 @@ exports.manageLeaveApplication = async (req, res) => {
 
 // Admin can upload salary slip for an employee
 exports.addSalarySlip = async (req, res) => {
-  const { userId, month, amount, fileUrl } = req.body; // fileUrl from Cloudinary (still on working not completed yet)
+  const { user, month } = req.body;
   try {
+    // Check if Multer has successfully uploaded the file
+    if (!req.file) {
+      return res
+        .status(400)
+        .json({ success: false, message: "No file provided" });
+    }
+
+    // Upload the file to Cloudinary
+    const upload = await uploadImage(req.file.path);
+
     const newSlip = new SalarySlip({
-      user: userId,
+      user: user,
       month,
-      amount,
-      fileUrl,
+      fileUrl: upload.secure_url,
     });
     await newSlip.save();
 
-    res.json({ success: true, message: "Salary slip added successfully" });
+    res.json({
+      success: true,
+      message: "Salary slip added successfully",
+      fileUrl: upload.secure_url,
+    });
   } catch (error) {
-    res.status(500).json({ success: false, message: "Server error" });
+    console.error("Add salary slip error:", error);
+    res
+      .status(500)
+      .json({ success: false, message: "Server error", error: error.message });
   }
 };
 
 // Admin can add a new employee
+
 exports.addEmployee = async (req, res) => {
   const { name, email, password, phone, accountDetails } = req.body;
   try {
@@ -74,13 +94,13 @@ exports.addEmployee = async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
+    // const newEmployeeId = Math.floor(10000000 + Math.random() * 90000000);
     const newUser = new User({
       name,
       email,
       password: hashedPassword,
-      role: "employee",
       phone,
-      accountDetails,
+      employeeId: uuidv4().substr(0, 8),
     });
     await newUser.save();
 
