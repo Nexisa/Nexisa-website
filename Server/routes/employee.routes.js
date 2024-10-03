@@ -5,6 +5,7 @@ const {
   updateProfile,
   applyLeave,
   updateProfilePicture,
+  getUserById
 } = require("../controllers/employee.controller");
 const authMiddleware = require("../middlewares/auth.middleware");
 
@@ -23,5 +24,8 @@ router.put(
 
 // route for applying leave (by employee only)
 router.post("/leave", authMiddleware(["employee"]), applyLeave);
+
+//route for getting user details
+router.get('/user-details', authMiddleware(), getUserById);
 
 module.exports = router;

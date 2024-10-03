@@ -22,7 +22,13 @@ const SigninForm = () => {
         if (result.data.success) {
           console.log(result.data);
           localStorage.setItem("token", result.data.token);
-          navigate(`/`);
+          if(result.data.role === 'employee'){
+            navigate('/user');
+          }
+          else{
+            navigate('/admin')
+          }
+          
         } else {
           alert(result.data.message);
         }

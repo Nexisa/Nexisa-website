@@ -1,14 +1,15 @@
 const jwt = require("jsonwebtoken");
+const User = require("../models/User");
 
 const authMiddleware = (roles = []) => {
-  return (req, res, next) => {
+  return async (req, res, next) => {
     const authHeader = req.header("Authorization");
     if (!authHeader) {
       return res
         .status(401)
-        .json({ status: false, message: "No token, authorization denied" });
+        .json({ status: false, message: "No auth, authorization denied" });
     }
-
+    // console.log(authHeader);
     const token = authHeader.split(" ")[1];
     if (!token) {
       return res
@@ -18,7 +19,8 @@ const authMiddleware = (roles = []) => {
 
     try {
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
-      req.user = decoded;
+      const user = await User.findById(decoded.id);
+      req.user = user;
 
       if (roles.length && !roles.includes(decoded.role)) {
         return res

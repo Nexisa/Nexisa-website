@@ -4,16 +4,24 @@ const { uploadImage } = require("../services/CloudinaryService");
 
 //controller for updating the user profile (working on it not completed yet)
 exports.updateProfile = async (req, res) => {
-  const { phone } = req.body;
-  const userId = req.user.id;
+  const {name, phone, email, password } = req.body;
+  const userId = req.user._id;
+  // console.log(userId)
   try {
     const user = await User.findById(userId);
     if (!user)
       return res
         .status(404)
         .json({ success: false, message: "User not found" });
+      
+    let hashedPassword = user.password;
+
+    password ? hashedPassword = await bcrypt.hash(password, 10) : hashedPassword = user.password;
 
     user.phone = phone || user.phone;
+    user.name = name || user.name;
+    user.email = email || user.email;
+    if(hashedPassword) user.password = hashedPassword || user.password;
     await user.save();
 
     res.json({
@@ -37,7 +45,7 @@ exports.updateProfile = async (req, res) => {
 
 // update only profile picture (still working on this not completed yet)
 exports.updateProfilePicture = async (req, res) => {
-  const userId = req.user.id;
+  const userId = req.user._id;
   try {
     // Check if Multer has successfully uploaded the file
     if (!req.file) {
@@ -90,3 +98,26 @@ exports.applyLeave = async (req, res) => {
       .json({ success: false, message: "Server error", error: error.message });
   }
 };
+
+exports.getUserById = async (req, res) => {
+  try {
+    const userId = req.user._id.toString();
+    const user = await User.findById(userId);
+    
+    if(!user){
+      return res.status(404).json({
+        success:false,
+        message:'User is not found'
+      })
+    }
+
+    res.status(200).json({
+      success: true,
+      user
+    });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ success: false, message: "Error fetching user", error });
+  }
+}
