@@ -84,7 +84,7 @@ exports.addSalarySlip = async (req, res) => {
 // Admin can add a new employee
 
 exports.addEmployee = async (req, res) => {
-  const { name, email, password, phone, accountDetails } = req.body;
+  const { name, email, password, phone } = req.body;
   try {
     const existingUser = await User.findOne({ email });
     if (existingUser)

@@ -30,7 +30,7 @@ const AccountInfo = () => {
         console.log(response.data);
         setUserDetails({
           name: userData.name,
-          // employeeId: userData.employeeId,
+          employeeId: userData.employeeId,
           phone: userData.phone,
           email: userData.email,// Leave password field empty
         });
@@ -87,143 +87,139 @@ const AccountInfo = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <div className="bg-white p-6 rounded-lg shadow-md w-96">
-        <h2 className="text-2xl font-semibold mb-4 text-center">Account Information</h2>
-
-        <div className="flex flex-col items-center">
-          {/* Image Upload Section */}
-          <div className="mb-4 text-center">
-            {imageURL ? (
-              <img src={imageURL} alt="Profile" className="w-24 h-24 rounded-full mb-4" />
-            ) : (
-              <div className="w-24 h-24 rounded-full bg-gray-200 mb-4 flex items-center justify-center">
-                <span>No Image</span>
+    <div className="max-w-screen container mx-auto p-4 overflow-x-hidden min-h-screen">
+        <h2 className="text-3xl font-semibold text-center mb-4 text-[#2C4964]">Account Information</h2>
+        <div className='bg-[#5846F9] w-[5%] h-0.5 mx-auto mb-8'></div>
+        <div className="w-11/12 mx-auto flex justify-center items-center">
+            <div className="flex flex-col md:flex-row w-11/12 md:py-10 md:px-20 rounded-lg shadow-md justify-between items-center gap-2">
+              {/* Image Upload Section */}
+              <div className="md:w-1/2 mb-4 md:mt-6 text-center flex flex-col justify-center items-center">
+                {imageURL ? (
+                  <img src={imageURL} alt="Profile" className="md:w-52 h-60 rounded-2xl mb-4" />
+                ) : (
+                  <div className="md:w-52 h-60 rounded-full bg-gray-200 mb-4 flex items-center justify-center">
+                    <span>No Image</span>
+                  </div>
+                )}
+                <button onClick={() => setShowImageModal(true)} className="mt-2 bg-[#5846F9] text-white px-8 py-2 rounded-full">
+                  Change
+                </button>
               </div>
-            )}
-            <button onClick={() => setShowImageModal(true)} className="mt-2 bg-blue-500 text-white px-4 py-2 rounded-md">
-              Change
-            </button>
-          </div>
 
-          {/* Display User Details */}
-          <div className="space-y-4">
-            <p className="text-lg"><strong>Name:</strong> {userDetails.name}</p>
-            {/* <p className="text-lg"><strong>Employee ID:</strong> {userDetails.employeeId}</p> */}
-            <p className="text-lg"><strong>Phone Number:</strong> {userDetails.phone}</p>
-            <p className="text-lg"><strong>Email:</strong> {userDetails.email}</p>
-          </div>
-
-          {/* Update Button */}
-          <button
-            onClick={() => setShowModal(true)}
-            className="mt-4 bg-blue-500 text-white px-4 py-2 rounded-md"
-          >
-            Update
-          </button>
-
-          {/* Modal for Updating Details */}
-          {showModal && (
-            <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center">
-              <div className="bg-white p-6 rounded-lg shadow-lg w-96">
-                <h2 className="text-xl font-semibold mb-4">Update Account Information</h2>
-
-                {/* Update Form in Modal */}
-                <div className="space-y-4">
-                  <input
-                    type="text"
-                    name="name"
-                    value={userDetails.name}
-                    onChange={handleInputChange}
-                    className="w-full p-2 border border-gray-300 rounded-md"
-                    placeholder="Name"
-                  />
-                  {/* <input
-                    type="text"
-                    name="employeeId"
-                    value={userDetails.employeeId}
-                    onChange={handleInputChange}
-                    className="w-full p-2 border border-gray-300 rounded-md"
-                    placeholder="Employee ID"
-                  /> */}
-                  <input
-                    type="text"
-                    name="phone"
-                    value={userDetails.phone}
-                    onChange={handleInputChange}
-                    className="w-full p-2 border border-gray-300 rounded-md"
-                    placeholder="Phone Number"
-                  />
-                  <input
-                    type="email"
-                    name="email"
-                    value={userDetails.email}
-                    onChange={handleInputChange}
-                    className="w-full p-2 border border-gray-300 rounded-md"
-                    placeholder="Email"
-                  />
-                  <input
-                    type="password"
-                    name="password"
-                    value={userDetails.password}
-                    onChange={handleInputChange}
-                    className="w-full p-2 border border-gray-300 rounded-md"
-                    placeholder="Password"
-                  />
-                </div>
-
-                {/* Confirm and Cancel Buttons */}
-                <div className="mt-4 flex justify-end">
+              {/* Display User Details */}
+              <div className='md:w-1/2 flex justify-center items-center'>
+                <div className="bg-[#CADFFF] py-6 rounded-xl flex flex-col gap-6 items-center px-4">
+                  <div className="space-y-4">
+                    <p className="text-lg bg-[#E4E9F1] pl-2 rounded-lg py-2"><strong>Name:</strong> {userDetails.name}</p>
+                    <p className="text-lg bg-[#E4E9F1] pl-2 rounded-lg py-2"><strong>Employee ID:</strong> {userDetails.employeeId}</p>
+                    <p className="text-lg bg-[#E4E9F1] pl-2 rounded-lg py-2"><strong>Phone Number:</strong> {userDetails.phone}</p>
+                    <p className="text-lg bg-[#E4E9F1] px-2 rounded-lg py-2"><strong>Email:</strong> {userDetails.email}</p>
+                  </div>
+                  {/* Update Button */}
                   <button
-                    onClick={() => setShowModal(false)}
-                    className="mr-2 bg-gray-500 text-white px-4 py-2 rounded-md"
+                    onClick={() => setShowModal(true)}
+                    className="mt-4 bg-[#5846F9] text-white px-8 py-2 rounded-full"
                   >
-                    Cancel
-                  </button>
-                  <button
-                    onClick={updateUserDetails}
-                    className="bg-blue-500 text-white px-4 py-2 rounded-md"
-                  >
-                    Confirm
+                    Update
                   </button>
                 </div>
+
               </div>
+
+              {/* Modal for Updating Details */}
+              {showModal && (
+                <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center">
+                  <div className="bg-white p-6 rounded-lg shadow-lg w-96">
+                    <h2 className="text-xl font-semibold mb-4">Update Account Information</h2>
+
+                    {/* Update Form in Modal */}
+                    <div className="space-y-4">
+                      <input
+                        type="text"
+                        name="name"
+                        value={userDetails.name}
+                        onChange={handleInputChange}
+                        className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#5846F9]"
+                        placeholder="Name"
+                      />
+                      <input
+                        type="text"
+                        name="phone"
+                        value={userDetails.phone}
+                        onChange={handleInputChange}
+                        className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#5846F9]"
+                        placeholder="Phone Number"
+                      />
+                      <input
+                        type="email"
+                        name="email"
+                        value={userDetails.email}
+                        onChange={handleInputChange}
+                        className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#5846F9]"
+                        placeholder="Email"
+                      />
+                      <input
+                        type="password"
+                        name="password"
+                        value={userDetails.password}
+                        onChange={handleInputChange}
+                        className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#5846F9]"
+                        placeholder="Password"
+                      />
+                    </div>
+
+                    {/* Confirm and Cancel Buttons */}
+                    <div className="mt-4 flex justify-end">
+                      <button
+                        onClick={() => setShowModal(false)}
+                        className="mr-2 bg-gray-500 text-white px-8 py-2 rounded-full"
+                      >
+                        Cancel
+                      </button>
+                      <button
+                        onClick={updateUserDetails}
+                        className="bg-[#5846F9] text-white px-8 py-2 rounded-full"
+                      >
+                        Confirm
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Modal for Image Upload */}
+              {showImageModal && (
+                <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center">
+                  <div className="bg-white p-6 rounded-lg shadow-lg w-96">
+                    <h2 className="text-xl font-semibold mb-4">Upload Profile Picture</h2>
+
+                    {/* Image Upload Form */}
+                    <input
+                      type="file"
+                      onChange={handleImageChange}
+                      className="w-full p-2 border border-gray-300 rounded-md mb-4"
+                    />
+
+                    {/* Confirm and Cancel Buttons */}
+                    <div className="mt-4 flex justify-end">
+                      <button
+                        onClick={() => setShowImageModal(false)}
+                        className="mr-2 bg-gray-500 text-white px-8 py-2 rounded-full"
+                      >
+                        Cancel
+                      </button>
+                      <button
+                        onClick={uploadPicture}
+                        className="bg-[#5846F9] text-white px-8 py-2 rounded-full"
+                      >
+                        Upload
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
-          )}
-
-          {/* Modal for Image Upload */}
-          {showImageModal && (
-            <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center">
-              <div className="bg-white p-6 rounded-lg shadow-lg w-96">
-                <h2 className="text-xl font-semibold mb-4">Upload Profile Picture</h2>
-
-                {/* Image Upload Form */}
-                <input
-                  type="file"
-                  onChange={handleImageChange}
-                  className="w-full p-2 border border-gray-300 rounded-md mb-4"
-                />
-
-                {/* Confirm and Cancel Buttons */}
-                <div className="mt-4 flex justify-end">
-                  <button
-                    onClick={() => setShowImageModal(false)}
-                    className="mr-2 bg-gray-500 text-white px-4 py-2 rounded-md"
-                  >
-                    Cancel
-                  </button>
-                  <button
-                    onClick={uploadPicture}
-                    className="bg-blue-500 text-white px-4 py-2 rounded-md"
-                  >
-                    Upload
-                  </button>
-                </div>
-              </div>
-            </div>
-          )}
         </div>
-      </div>
     </div>
   );
 };
