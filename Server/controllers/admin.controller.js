@@ -15,6 +15,37 @@ exports.getAllEmployees = async (req, res) => {
   }
 };
 
+// function to get a specific employee by ID (leave applications, salary slips, etc. optional for now)
+exports.getEmployeeById = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const employee = await User.findOne({ _id: id, role: "employee" }).select(
+      "-password"
+    );
+    if (!employee) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Employee not found" });
+    }
+
+    // Optionally, you can include additional related data
+    const leaveApplications = await LeaveApplication.find({ user: id });
+    const salarySlips = await SalarySlip.find({ user: id });
+
+    res.json({
+      success: true,
+      employee,
+      leaveApplications,
+      salarySlips,
+    });
+  } catch (error) {
+    console.error("Get employee by ID error:", error);
+    res
+      .status(500)
+      .json({ success: false, message: "Server error", error: error.message });
+  }
+};
+
 // Admin can view all leave applications
 exports.getAllLeaveApplications = async (req, res) => {
   try {
@@ -44,6 +75,27 @@ exports.manageLeaveApplication = async (req, res) => {
     res.json({ success: true, message: `Leave application ${status}` });
   } catch (error) {
     res.status(500).json({ success: false, message: "Server error" });
+  }
+};
+// function to get a specific leave application by ID
+exports.getLeaveApplicationById = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const leaveApplication = await LeaveApplication.findById(id).populate(
+      "user",
+      "name email"
+    );
+    if (!leaveApplication) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Leave application not found" });
+    }
+    res.json({ success: true, leaveApplication });
+  } catch (error) {
+    console.error("Get leave application by ID error:", error);
+    res
+      .status(500)
+      .json({ success: false, message: "Server error", error: error.message });
   }
 };
 
@@ -82,7 +134,6 @@ exports.addSalarySlip = async (req, res) => {
 };
 
 // Admin can add a new employee
-
 exports.addEmployee = async (req, res) => {
   const { name, email, password, phone } = req.body;
   try {
@@ -107,6 +158,30 @@ exports.addEmployee = async (req, res) => {
     res.json({ success: true, message: "Employee added successfully" });
   } catch (error) {
     console.error("Add employee error:", error);
+    res
+      .status(500)
+      .json({ success: false, message: "Server error", error: error.message });
+  }
+};
+
+// function to delete a specific employee
+exports.deleteEmployee = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const employee = await User.findOneAndDelete({ _id: id, role: "employee" });
+    if (!employee) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Employee not found" });
+    }
+
+    // as per the requirements we Delete related data (leave applications, salary slips, etc.) (optional for now)
+    await LeaveApplication.deleteMany({ user: id });
+    await SalarySlip.deleteMany({ user: id });
+
+    res.json({ success: true, message: "Employee deleted successfully" });
+  } catch (error) {
+    console.error("Delete employee error:", error);
     res
       .status(500)
       .json({ success: false, message: "Server error", error: error.message });
