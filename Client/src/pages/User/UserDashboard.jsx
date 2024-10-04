@@ -1,7 +1,8 @@
 // import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import image from '../../assets/Logo/about.jpg'
-import axios from '../../api/axios'
+import axios from '../../api/axios';
+import {toast} from 'react-hot-toast';;
 
 const UserDashBoard = () => {
     const navigate = useNavigate();
@@ -23,9 +24,11 @@ const UserDashBoard = () => {
                 localStorage.removeItem('token');
                 // Optionally, redirect the user or update the UI
                 console.log(res.data.message); 
+                toast.success("Logged out successfully");
                 navigate('/');// You can use this for a success message
             }
         } catch (error) {
+            toast.error("Something went wrong");
             console.error("Logout error:", error);
             // Optionally, handle the error (e.g., show a notification)
         }

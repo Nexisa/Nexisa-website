@@ -2,7 +2,8 @@ import { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { FiCalendar } from 'react-icons/fi';
-import axios from '../../api/axios'
+import axios from '../../api/axios';
+import {toast} from 'react-hot-toast';
 
 const LeaveApplication = () => {
   const [reason, setReason] = useState('');
@@ -27,7 +28,7 @@ const LeaveApplication = () => {
         },
       });
       console.log(response.data);  // Log response for debugging
-      
+      toast.success("Your application is sent successfully");
       // Clear form fields after successful submission
       setReason('');
       setStartDate(null);
@@ -35,6 +36,7 @@ const LeaveApplication = () => {
       
       // Optionally handle success (e.g., display a success message)
     } catch (error) {
+      toast.error("Something went wrong");
       console.error(error);  // Log error for debugging
       // Optionally handle error (e.g., display an error message)
     }

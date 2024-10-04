@@ -14,9 +14,11 @@ import AdminDashboard from './pages/Admin/AdminDashboard';
 import LeaveApplication from './pages/User/LeaveApplication';
 import SalarySlip from './pages/User/SalarySlip';
 import AccountInfo from './pages/User/AccountInfo';
-import PrivateRoute from './components/PrivateRoute';
+// import PrivateRoute from './components/PrivateRoute';
 import Leave from './pages/Admin/Leave';
 import Employees from './pages/Admin/Employees';
+import UserProtection from './components/UserProtection';
+import AdminProtection from './components/AdminProtection';
 
 function App() {
   return (
@@ -30,39 +32,39 @@ function App() {
         <Route path='/career' element={<CareerPage/>} />
         <Route path='/signin' element={<Signin />} />
         <Route path='/user' element={
-          <PrivateRoute>
+          <UserProtection>
             <UserDashBoard />
-          </PrivateRoute>
+          </UserProtection>
         } />
         <Route path='user/leave-application' element={
-          <PrivateRoute>
+          <UserProtection>
             <LeaveApplication />
-          </PrivateRoute>
+          </UserProtection>
         } />
         <Route path='user/salary-slip' element={
-          <PrivateRoute>
+          <UserProtection>
             <SalarySlip />
-          </PrivateRoute>
+          </UserProtection>
         } />
         <Route path='user/account-info' element={
-          <PrivateRoute>
+          <UserProtection>
             <AccountInfo />
-          </PrivateRoute>
+          </UserProtection>
         } />
         <Route path='/admin' element={
-          <PrivateRoute>
+          <AdminProtection>
             <AdminDashboard />
-          </PrivateRoute>
+          </AdminProtection>
         } />
         <Route path='/admin/leave-applications' element={
-          <PrivateRoute>
+          <AdminProtection>
             <Leave />
-          </PrivateRoute>
+          </AdminProtection>
         } />
         <Route path='/admin/employees' element={
-          <PrivateRoute>
+          <AdminProtection>
             <Employees />
-          </PrivateRoute>
+          </AdminProtection>
         } />
         <Route path='*' element={<ErrorPage/>} />
       </Routes>

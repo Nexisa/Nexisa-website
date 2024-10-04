@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "../../api/axios";
 import EmployeeCard from "../../components/EmployeeCard"; // Assuming each card is a separate component
+import {toast} from 'react-hot-toast';
 
 const Employee = () => {
   const [employees, setEmployees] = useState([]);
@@ -50,9 +51,11 @@ const Employee = () => {
                 Authorization: `Bearer ${token}`, // Include the token in the request header
             },
         });
+      toast.success("Employee added successfully");
       setShowAddModal(false);
       fetchEmployees();
     } catch (err) {
+      toast.error("Something went wrong");
       console.error("Error adding employee:", err);
     }
   };
@@ -73,42 +76,52 @@ const Employee = () => {
     }
   };
 
-  // Delete Employee - yet to be done
+  // Delete Employee
   const deleteEmployee = async () => {
     try {
-      await axios.delete(`/admin/deleteUser/${selectedEmployee._id}`);
+      const token = localStorage.getItem('token');
+      await axios.delete(`/admin/delete-employee/${selectedEmployee._id}`, {
+            headers: {
+                Authorization: `Bearer ${token}`, // Include the token in the request header
+            },
+        });
       setShowDeleteModal(false);
+      toast.success("Employee deleted successfully");
       fetchEmployees();
     } catch (err) {
+      toast.error("Something went wrong");
       console.error("Error deleting employee:", err);
     }
   };
 
   return (
-    <div className="p-4">
-      <h1 className="text-3xl font-bold text-center mb-6">Employee Information</h1>
-      <button
-        className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 mb-6"
-        onClick={() => setShowAddModal(true)}
-      >
-        Add Employee
-      </button>
-      <div className="grid grid-cols-2 gap-6">
-        {employees.map((employee) => (
-          <EmployeeCard
-            key={employee._id}
-            employee={employee}
-            onUploadClick={() => {
-              setSelectedEmployee(employee);
-              setShowUploadModal(true);
-            }}
-            onDeleteClick={() => {
-              setSelectedEmployee(employee);
-              setShowDeleteModal(true);
-            }}
-          />
-        ))}
-      </div>
+    <div className="max-w-screen container mx-auto p-4 overflow-x-hidden min-h-screen">
+        <h2 className="text-3xl font-semibold text-center mb-4 text-[#2C4964]">Account Information</h2>
+        <div className='bg-[#5846F9] w-[5%] h-0.5 mx-auto mb-8'></div>
+        <div className="flex justify-center">
+          <button
+            className="px-8 py-2 bg-[#5846F9] text-white rounded-full hover:bg-[#422ef4] mb-10"
+            onClick={() => setShowAddModal(true)}
+          >
+            Add Employee
+          </button>
+        </div>
+        <div className="md:w-10/12 mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
+          {employees.map((employee) => (
+            <EmployeeCard
+              key={employee._id}
+              employee={employee}
+              onUploadClick={() => {
+                setSelectedEmployee(employee);
+                setShowUploadModal(true);
+              }}
+              onDeleteClick={() => {
+                setSelectedEmployee(employee);
+                setShowDeleteModal(true);
+              }}
+            />
+          ))}
+        </div>
 
       {/* Add Employee Modal */}
       {showAddModal && (
@@ -119,34 +132,35 @@ const Employee = () => {
               <input
                 type="text"
                 placeholder="Name"
-                className="border p-2 w-full rounded"
+                name="name"
+                className="border p-2 w-full rounded focus:outline-none focus:ring-2 focus:ring-[#5846F9]"
                 onChange={(e) => setNewEmployee({ ...newEmployee, name: e.target.value })}
               />
               <input
                 type="email"
                 placeholder="Email"
-                className="border p-2 w-full rounded"
+                className="border p-2 w-full rounded focus:outline-none focus:ring-2 focus:ring-[#5846F9]"
                 onChange={(e) => setNewEmployee({ ...newEmployee, email: e.target.value })}
               />
               <input
                 type="password"
                 placeholder="Password"
-                className="border p-2 w-full rounded"
+                className="border p-2 w-full rounded focus:outline-none focus:ring-2 focus:ring-[#5846F9]"
                 onChange={(e) => setNewEmployee({ ...newEmployee, password: e.target.value })}
               />
               <input
                 type="text"
                 placeholder="Phone"
-                className="border p-2 w-full rounded"
+                className="border p-2 w-full rounded focus:outline-none focus:ring-2 focus:ring-[#5846F9]"
                 onChange={(e) => setNewEmployee({ ...newEmployee, phone: e.target.value })}
               />
             </div>
             <div className="flex justify-between mt-4">
-              <button className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600" onClick={addEmployee}>
+              <button className="px-8 py-2 bg-[#5846F9] text-white rounded-full hover:bg-[#422ef4]" onClick={addEmployee}>
                 Add
               </button>
               <button
-                className="bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-600"
+                className="bg-gray-500 text-white py-2 px-8 rounded-full hover:bg-gray-600"
                 onClick={() => setShowAddModal(false)}
               >
                 Cancel
@@ -170,16 +184,16 @@ const Employee = () => {
               <input
                 type="text"
                 placeholder="Month"
-                className="border p-2 w-full rounded"
+                className="border p-2 w-full rounded focus:outline-none focus:ring-2 focus:ring-[#5846F9]"
                 onChange={(e) => setSlipData({ ...slipData, month: e.target.value })}
               />
             </div>
             <div className="flex justify-between mt-4">
-              <button className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600" onClick={uploadSlip}>
+              <button className="px-8 py-2 bg-[#5846F9] text-white rounded-full hover:bg-[#422ef4]" onClick={uploadSlip}>
                 Upload
               </button>
               <button
-                className="bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-600"
+                className="bg-gray-500 text-white py-2 px-8 rounded-full hover:bg-gray-600"
                 onClick={() => setShowUploadModal(false)}
               >
                 Cancel

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from '../../api/axios';
+import {toast} from 'react-hot-toast'
 
 const AccountInfo = () => {
   const [userDetails, setUserDetails] = useState({
@@ -15,9 +16,7 @@ const AccountInfo = () => {
   const [showModal, setShowModal] = useState(false); // Modal for updating details
   const [showImageModal, setShowImageModal] = useState(false); // Modal for image upload
 
-  // Fetch user data by ID when the component mounts
-  useEffect(() => {
-    const fetchUserData = async () => {
+  const fetchUserData = async () => {
 
       try {
         const response = await axios.get('/employee/user-details', {
@@ -39,6 +38,8 @@ const AccountInfo = () => {
         console.error('Error fetching user data:', error);
       }
     };
+  // Fetch user data by ID when the component mounts
+  useEffect(() => {
 
     fetchUserData();
   }, []);
@@ -64,8 +65,11 @@ const AccountInfo = () => {
       });
       setImageURL(response.data.url); // Assuming Cloudinary returns the URL of the uploaded image
       console.log('Image uploaded:', response.data.url);
+      fetchUserData();
+      toast.success("Picture uploaded successfully");
       setShowImageModal(false); // Close modal after upload
     } catch (error) {
+      toast.error("Error while updating picture");
       console.error('Error uploading image:', error);
     }
   };
@@ -79,8 +83,11 @@ const AccountInfo = () => {
         },
       });
       console.log('User details updated:', response.data);
+      toast.success("Your details updated successfully");
       setShowModal(false); // Close modal after successful update
     } catch (error) {
+      toast.error("Something went wrong");
+      setShowModal(false);
       console.error('Error updating user details:', error);
     }
   };

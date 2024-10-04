@@ -1,7 +1,8 @@
 // import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import image from '../../assets/Logo/about.jpg'
-import axios from '../../api/axios'
+import axios from '../../api/axios';
+import {toast} from 'react-hot-toast';
 
 const AdminDashboard = () => {
     const navigate = useNavigate();
@@ -23,9 +24,11 @@ const AdminDashboard = () => {
                 localStorage.removeItem('token');
                 // Optionally, redirect the user or update the UI
                 console.log(res.data.message); 
+                toast.success("Logged out successfully");
                 navigate('/');// You can use this for a success message
             }
         } catch (error) {
+            toast.error("Something went wrong");
             console.error("Logout error:", error);
             // Optionally, handle the error (e.g., show a notification)
         }
@@ -44,8 +47,8 @@ const AdminDashboard = () => {
                     <Link to='/admin/leave-applications'>
                         <div className='bg-[#5846F9] text-white p-4 rounded-xl text-center cursor-pointer'>Leave Applications</div>
                     </Link>
-                    <Link to='/admin/salary-slips'>
-                        <div className='bg-[#5846F9] text-white p-4 rounded-xl text-center cursor-pointer'>Salary Slips</div>
+                    <Link to='/admin/others'>
+                        <div className='bg-[#5846F9] text-white p-4 rounded-xl text-center cursor-pointer'>Others</div>
                     </Link>
                     <Link to='/admin/employees'>
                         <div className='bg-[#5846F9] text-white p-4 rounded-xl text-center cursor-pointer'>Employees Informations</div>

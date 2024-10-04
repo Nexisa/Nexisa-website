@@ -2,6 +2,7 @@ import { useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import axios from "../api/axios";
+import {toast} from 'react-hot-toast';
 
 const SigninForm = () => {
   const [formData, setFormData] = useState({
@@ -22,6 +23,8 @@ const SigninForm = () => {
         if (result.data.success) {
           console.log(result.data);
           localStorage.setItem("token", result.data.token);
+          localStorage.setItem('role', result.data.role);
+          toast.success("Signed in Successfully");
           if(result.data.role === 'employee'){
             navigate('/user');
           }

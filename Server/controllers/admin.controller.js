@@ -4,6 +4,9 @@ const SalarySlip = require("../models/SalarySlip");
 const bcrypt = require("bcrypt");
 const { uploadImage } = require("../services/CloudinaryService");
 const { v4: uuidv4 } = require("uuid");
+const leaveAcceptanceTemplate = require("../mailTemplate/leaveAcceptance");
+const mailSender = require("../services/mailSender");
+const leaveRejecetionTemplate = require("../mailTemplate/leaveRejection");
 
 // Admin can view all employees
 exports.getAllEmployees = async (req, res) => {
@@ -62,21 +65,54 @@ exports.getAllLeaveApplications = async (req, res) => {
 // Admin can approve/reject leave application
 exports.manageLeaveApplication = async (req, res) => {
   const { leaveId, status } = req.body; // status can be 'approved' or 'rejected'
+  // console.log(leaveId)
   try {
-    const leaveApplication = await LeaveApplication.findById(leaveId);
+    const leaveApplication = await LeaveApplication.findById(leaveId).populate('user');
+
     if (!leaveApplication)
       return res
         .status(404)
         .json({ success: false, message: "Leave application not found" });
 
+    // Update the status of the leave application
     leaveApplication.status = status;
     await leaveApplication.save();
 
-    res.json({ success: true, message: `Leave application ${status}` });
+
+    //mail part
+    const userEmail = leaveApplication.user.email;
+
+    if(leaveApplication.status === 'approved') {
+        const emailBody = leaveAcceptanceTemplate(
+          leaveApplication.user.name,
+          leaveApplication.startDate,
+          leaveApplication.endDate
+        );
+
+        const mailResponse = await mailSender(userEmail, "Your request is Accepted", emailBody);
+    }
+    else if(leaveApplication.status === 'rejected'){
+        const emailBody = leaveRejecetionTemplate(
+          leaveApplication.user.name,
+          leaveApplication.startDate,
+          leaveApplication.endDate
+        );
+
+        const mailResponse = await mailSender(userEmail, "Your request is rejected", emailBody);
+    }
+
+
+
+    // Delete the leave application after the status update
+    await LeaveApplication.findByIdAndDelete(leaveId);
+
+    res.json({ success: true, message: `Leave application ${status} and deleted successfully` });
   } catch (error) {
+    console.error("Error managing leave application:", error);
     res.status(500).json({ success: false, message: "Server error" });
   }
 };
+
 // function to get a specific leave application by ID
 exports.getLeaveApplicationById = async (req, res) => {
   const { id } = req.params;

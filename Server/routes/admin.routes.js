@@ -40,6 +40,6 @@ router.post("/add-salary-slip", upload.single("fileUrl"), addSalarySlip);
 router.post("/add-employee", addEmployee);
 
 // route for deleting employee
-router.delete("/employees/:id", deleteEmployee);
+router.delete("/delete-employee/:id", deleteEmployee);
 
 module.exports = router;

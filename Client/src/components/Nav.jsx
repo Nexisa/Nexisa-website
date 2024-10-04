@@ -1,13 +1,41 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
 import logo from '../assets/Logo/nexisa.png';
 
 const Navbar = () => {
-  // State to toggle mobile menu
   const [isOpen, setIsOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userRole, setUserRole] = useState(null);
+  const navigate = useNavigate();
 
   // Function to handle the opening and closing of the mobile menu
   const toggleMenu = () => {
     setIsOpen(!isOpen);
+  };
+
+  // Function to close the mobile menu when a link is clicked
+  const closeMenu = () => {
+    setIsOpen(false);
+  };
+
+  // Check if the user is logged in and get the user role
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    const role = localStorage.getItem('role'); // Assuming the role is also stored in localStorage
+
+    if (token) {
+      setIsLoggedIn(true);
+      setUserRole(role);
+    }
+  });
+
+  // Handle redirection based on user role
+  const handleDashboardClick = () => {
+    if (userRole === 'admin') {
+      navigate('/admin');
+    } else if (userRole === 'employee') {
+      navigate('/user');
+    }
   };
 
   return (
@@ -20,41 +48,50 @@ const Navbar = () => {
 
         {/* Navigation Links for larger screens */}
         <ul className="hidden md:flex space-x-8 text-gray-800 font-medium">
-          <li className="relative group">
-            <a href="/" className="hover:text-[#5846F9] text-xl transition-colors duration-300">Home</a>
-            <div className="absolute left-0 bottom-0 h-0.5 w-0 bg-[#5846F9] transition-all duration-300 group-hover:w-full"></div>
-          </li>
-          <li className="relative group">
-            <a href="/portfolio" className="hover:text-[#5846F9] text-xl transition-colors duration-300">Portfolio</a>
-            <div className="absolute left-0 bottom-0 h-0.5 w-0 bg-[#5846F9] transition-all duration-300 group-hover:w-full"></div>
-          </li>
-          <li className="relative group">
-            <a href="/career" className="hover:text-[#5846F9] text-xl transition-colors duration-300">Career</a>
-            <div className="absolute left-0 bottom-0 h-0.5 w-0 bg-[#5846F9] transition-all duration-300 group-hover:w-full"></div>
-          </li>
-          <li className="relative group">
-            <a href="/team" className="hover:text-[#5846F9] text-xl transition-colors duration-300">Team</a>
-            <div className="absolute left-0 bottom-0 h-0.5 w-0 bg-[#5846F9] transition-all duration-300 group-hover:w-full"></div>
-          </li>
-          <li className="relative group">
-            <a href="/contact" className="hover:text-[#5846F9] text-xl transition-colors duration-300">Contact</a>
-            <div className="absolute left-0 bottom-0 h-0.5 w-0 bg-[#5846F9] transition-all duration-300 group-hover:w-full"></div>
-          </li>
+          {['/', '/portfolio', '/career', '/team', '/contact'].map((path, index) => (
+            <li key={index} className="relative group">
+              <NavLink
+                to={path}
+                className={({ isActive }) =>
+                  `text-xl transition-colors duration-300 ${isActive ? 'text-[#5846F9]' : 'hover:text-[#5846F9]'}`
+                }
+              >
+                {path === '/' ? 'Home' : path.replace('/', '').charAt(0).toUpperCase() + path.slice(2)}
+              </NavLink>
+              <div className="absolute left-0 bottom-0 h-0.5 w-0 bg-[#5846F9] transition-all duration-300 group-hover:w-full"></div>
+            </li>
+          ))}
         </ul>
+
+        {/* Sign In / Dashboard Button */}
+        <div>
+          {isLoggedIn ? (
+            <button
+              onClick={handleDashboardClick}
+              className="bg-[#5846F9] text-white px-4 py-2 rounded-lg hover:bg-[#3f38e7] transition-colors duration-300"
+            >
+              Dashboard
+            </button>
+          ) : (
+            <NavLink
+              to="/signin"
+              className={({ isActive }) =>
+                  `text-xl transition-colors duration-300 ${isActive ? 'text-[#5846F9]' : 'hover:text-[#5846F9]'}`
+                }
+            >
+              Sign In
+            </NavLink>
+          )}
+        </div>
 
         {/* Hamburger Icon for small screens */}
         <div className="md:hidden">
-          <button
-            onClick={toggleMenu}
-            className="text-gray-800 focus:outline-none"
-          >
+          <button onClick={toggleMenu} className="text-gray-800 focus:outline-none">
             {isOpen ? (
-              // Icon for closing menu
               <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
               </svg>
             ) : (
-              // Icon for opening menu
               <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7" />
               </svg>
@@ -67,20 +104,41 @@ const Navbar = () => {
       {isOpen && (
         <div className="md:hidden bg-white shadow-lg">
           <ul className="text-gray-800 font-medium px-6 py-4 space-y-4">
+            {['/', '/portfolio', '/career', '/team', '/contact'].map((path, index) => (
+              <li key={index}>
+                <NavLink
+                  to={path}
+                  className={({ isActive }) =>
+                    `block text-xl ${isActive ? 'text-[#5846F9]' : 'hover:text-[#5846F9]'}`
+                  }
+                  onClick={closeMenu} // Close the menu when a link is clicked
+                >
+                  {path === '/' ? 'Home' : path.replace('/', '').charAt(0).toUpperCase() + path.slice(2)}
+                </NavLink>
+              </li>
+            ))}
+
+            {/* Sign In / Dashboard Button in Mobile Menu */}
             <li>
-              <a href="/" className="block hover:text-[#5846F9] text-xl">Home</a>
-            </li>
-            <li>
-              <a href="/portfolio" className="block hover:text-[#5846F9] text-xl">Portfolio</a>
-            </li>
-            <li>
-              <a href="/career" className="block hover:text-[#5846F9] text-xl">Career</a>
-            </li>
-            <li>
-              <a href="/team" className="block hover:text-[#5846F9] text-xl">Team</a>
-            </li>
-            <li>
-              <a href="/contact" className="block hover:text-[#5846F9] text-xl">Contact</a>
+              {isLoggedIn ? (
+                <button
+                  onClick={() => {
+                    handleDashboardClick();
+                    closeMenu(); // Close menu when dashboard is clicked
+                  }}
+                  className="block text-xl text-[#5846F9] w-full text-left"
+                >
+                  Dashboard
+                </button>
+              ) : (
+                <NavLink
+                  to="/signin"
+                  className="block text-xl text-[#5846F9]"
+                  onClick={closeMenu} // Close menu when Sign In is clicked
+                >
+                  Sign In
+                </NavLink>
+              )}
             </li>
           </ul>
         </div>

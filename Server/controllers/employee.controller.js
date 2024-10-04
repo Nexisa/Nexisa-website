@@ -1,6 +1,7 @@
 const User = require("../models/User");
 const LeaveApplication = require("../models/LeaveApplication");
 const { uploadImage } = require("../services/CloudinaryService");
+const bcrypt = require("bcrypt");
 
 // controller for updating the user profile (working on it not completed yet)
 exports.updateProfile = async (req, res) => {
@@ -14,16 +15,14 @@ exports.updateProfile = async (req, res) => {
         .status(404)
         .json({ success: false, message: "User not found" });
 
-    let hashedPassword = user.password;
-
-    password
-      ? (hashedPassword = await bcrypt.hash(password, 10))
-      : (hashedPassword = user.password);
+    if (password) {
+      const hashedPassword = await bcrypt.hash(password, 10);
+      user.password = hashedPassword; // Update the password
+    }
 
     user.phone = phone || user.phone;
     user.name = name || user.name;
     user.email = email || user.email;
-    if (hashedPassword) user.password = hashedPassword || user.password;
     await user.save();
 
     res.json({
