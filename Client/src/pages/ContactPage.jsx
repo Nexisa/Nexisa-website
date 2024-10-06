@@ -11,7 +11,7 @@ const ContactPage = () => {
         <h2 className="text-xl md:text-3xl font-semibold text-center mb-4 text-[#2C4964]">Contact Us</h2>
         <div className='bg-[#5846F9] w-[5%] h-0.5 mx-auto mb-8'></div>
         <div className="flex flex-col md:flex-row w-11/12 mx-auto mb-8 gap-8">
-            <div className='w-11/12 md:w-1/2 flex justify-center items-center'>
+            <div className='w-11/12 mx-auto md:w-1/2 flex justify-center items-center'>
                 <div className='flex flex-col gap-20'>
                     <div className='flex gap-20'>
                         <img src={address} alt="Address" className='w-32 h-32' />
@@ -23,7 +23,7 @@ const ContactPage = () => {
                     </div>
                 </div>
             </div>
-            <div className='w-11/12 md:w-1/2'>
+            <div className='w-11/12 mx-auto md:w-1/2'>
                 <ContactForm/>
             </div>
         </div>

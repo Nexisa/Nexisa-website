@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import axios from "../api/axios"; // Adjust the import path according to your project structure
 import { toast } from "react-hot-toast";
 
@@ -6,6 +6,7 @@ import { toast } from "react-hot-toast";
 const AuthContext = createContext();
 
 // AuthProvider component that wraps around the app to provide auth functionality
+// eslint-disable-next-line react/prop-types
 export const AuthProvider = ({ children }) => {
   // State to track whether the user is authenticated
   const [isAuthenticated, setIsAuthenticated] = useState(
@@ -40,7 +41,7 @@ export const AuthProvider = ({ children }) => {
     } catch (error) {
       // Handle any unexpected errors (like network issues)
       console.error("Login error:", error);
-      toast.error("An unexpected error occurred.");
+      // toast.error("An unexpected error occurred.");
       return { success: false, message: "An unexpected error occurred." };
     }
   };

@@ -1,10 +1,11 @@
 // import React from 'react'
 import { Link, useNavigate } from "react-router-dom";
 import image from "../../assets/Logo/about.jpg";
-import axios from "../../api/axios";
-import { toast } from "react-hot-toast";
+// import axios from "../../api/axios";
+// import { toast } from "react-hot-toast";
 import { useAuth } from "../../context/AuthContext";
 const UserDashBoard = () => {
+  // eslint-disable-next-line no-unused-vars
   const { isAuthenticated, logout } = useAuth(); // Get authentication state and logout function
 
   const navigate = useNavigate();

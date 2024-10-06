@@ -4,6 +4,8 @@ import health from "../assets/Portfolio/health.jpg";
 import festival from "../assets/Portfolio/festival.jpg";
 import rescue from "../assets/Portfolio/rescue.jpg";
 import baizu from "../assets/Portfolio/baizu.jpg";
+import sexeducation from '../assets/Portfolio/sexeducation.jpg'
+
 
 //teams
 import aneek from "../assets/Team/Aneek.jpg";
@@ -37,31 +39,39 @@ import digital from "../assets/Career/digital.png";
 export const portfolioData = [
   {
     title: "Hostel Booking System",
-    description:
-      "Designed full stack web application for room booking of a hostel chain company",
+    description: "Designed full stack web application for room booking of a hostel chain company",
     imageUrl: `${hostel}`,
+    link: '/none'
   },
   {
     title: "Health Risk Assesment System",
-    description:
-      "Developed a system to assesses the health risks associated with diabetes and hypertension",
+    description: "Developed a system to assesses the health risks associated with diabetes and hypertension",
     imageUrl: `${health}`,
+    link: '/none'
   },
   {
-    title: "Festival connect",
+    title: "Festiwah",
     description: "Created social media for connecting people during festivals",
     imageUrl: `${festival}`,
+    link: '/none'
   },
   {
     title: "Rescue Ride",
     description: "Developed an ambulance booking system for emergency ride",
     imageUrl: `${rescue}`,
+    link: '/none'
+  },
+  {
+    title: "Teenwise",
+    description: "Developed a website to provide sex education to students",
+    imageUrl: `${sexeducation}`,
+    link: 'https://teenwise.vercel.app/'
   },
   {
     title: "Baizus Hotel",
-    description:
-      "Designed an app and increased app engagement for a hotel-chain company",
+    description: "Designed an app and increased app engagement for a hotel-chain company",
     imageUrl: `${baizu}`,
+    link: '/none'
   },
 ];
 
@@ -74,7 +84,7 @@ export const teamData = [
   {
     imgUrl: `${puja}`,
     name: "PUJA MONDAL",
-    role: "HR Manager",
+    role: "HR Manager, Front-End Developer",
   },
   {
     imgUrl: `${simpy}`,
@@ -114,7 +124,7 @@ export const teamData = [
   {
     imgUrl: `${harshika}`,
     name: "HARSHIKA SINGH",
-    role: "UI/UX Designer",
+    role: "UI/UX Designer, Front-End Developer Intern",
   },
   {
     imgUrl: `${ayush}`,
@@ -201,17 +211,6 @@ export const careerData = [
   {
     title: "Digital Marketing",
     imgSrc: `${digital}`,
-  },
-];
-
-export const dummyData = [
-  {
-    month: "January",
-    url: `${asham}`,
-  },
-  {
-    month: "February",
-    url: `${khushi}`,
   },
 ];
 
