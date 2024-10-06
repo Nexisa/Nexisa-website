@@ -6,6 +6,7 @@ const {
   applyLeave,
   updateProfilePicture,
   getUserById,
+  getSalarySlips,
 } = require("../controllers/employee.controller");
 const authMiddleware = require("../middlewares/auth.middleware");
 
@@ -29,5 +30,8 @@ router.post("/leave", authMiddleware(["employee"]), applyLeave);
 
 //route for getting user details
 router.get("/user-details", authMiddleware(), getUserById);
+
+// route for getting salary slip
+router.get("/salary-slips", authMiddleware(), getSalarySlips);
 
 module.exports = router;

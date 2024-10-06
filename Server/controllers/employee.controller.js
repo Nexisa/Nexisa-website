@@ -2,7 +2,7 @@ const User = require("../models/User");
 const LeaveApplication = require("../models/LeaveApplication");
 const { uploadImage } = require("../services/CloudinaryService");
 const bcrypt = require("bcrypt");
-
+const SalarySlip = require("../models/SalarySlip");
 // controller for updating the user profile (working on it not completed yet)
 exports.updateProfile = async (req, res) => {
   const { name, phone, email, password } = req.body;
@@ -121,5 +121,39 @@ exports.getUserById = async (req, res) => {
     res
       .status(500)
       .json({ success: false, message: "Error fetching user", error });
+  }
+};
+
+// get salary slip
+exports.getSalarySlips = async (req, res) => {
+  if (!req.user || !req.user._id) {
+    return res.status(401).json({
+      success: false,
+      message: "Unauthorized: No user found in request.",
+    });
+  }
+  const userId = req.user._id;
+
+  try {
+    const salarySlips = await SalarySlip.find({ user: userId });
+
+    if (!salarySlips || salarySlips.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: "No salary slips found for this user.",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      salarySlips,
+    });
+  } catch (error) {
+    console.error("Error fetching salary slips:", error);
+    res.status(500).json({
+      success: false,
+      message: "Server error",
+      error: error.message,
+    });
   }
 };

@@ -2,7 +2,8 @@ import { useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import axios from "../api/axios";
-import {toast} from 'react-hot-toast';
+import { toast } from "react-hot-toast";
+import { useAuth } from "../context/AuthContext"; // Import useAuth from AuthContext
 
 const SigninForm = () => {
   const [formData, setFormData] = useState({
@@ -11,32 +12,28 @@ const SigninForm = () => {
   });
 
   const [showPassword, setShowPassword] = useState(false);
-
   const { email, password } = formData;
   const navigate = useNavigate();
+  const { login } = useAuth(); // Get the login function from AuthContext
 
-  const handleOnSubmit = (e) => {
+  const handleOnSubmit = async (e) => {
     e.preventDefault();
-    axios
-      .post("/auth/signin", formData)
-      .then((result) => {
-        if (result.data.success) {
-          console.log(result.data);
-          localStorage.setItem("token", result.data.token);
-          localStorage.setItem('role', result.data.role);
-          toast.success("Signed in Successfully");
-          if(result.data.role === 'employee'){
-            navigate('/user');
-          }
-          else{
-            navigate('/admin')
-          }
-          
+    try {
+      const result = await login(formData);
+      if (result && result.success) {
+        toast.success("Signed in Successfully");
+        if (result.role === "employee") {
+          navigate("/user");
         } else {
-          alert(result.data.message);
+          navigate("/admin");
         }
-      })
-      .catch((err) => console.log(err));
+      } else {
+        toast.error(result.message || "Login failed."); // Use a fallback message
+      }
+    } catch (err) {
+      console.error(err);
+      toast.error("Something went wrong during sign in."); // Handle unexpected errors
+    }
   };
 
   const handleOnChange = (e) => {

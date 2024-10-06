@@ -11,7 +11,7 @@ const salarySlipSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    fileUrl: {
+    file: {
       type: String,
       required: true,
     },
