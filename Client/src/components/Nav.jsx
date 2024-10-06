@@ -68,16 +68,15 @@ const Navbar = () => {
           {isLoggedIn ? (
             <button
               onClick={handleDashboardClick}
-              className="bg-[#5846F9] text-white px-4 py-2 rounded-lg hover:bg-[#3f38e7] transition-colors duration-300"
+              className="bg-[#5846F9] hidden md:block text-white px-4 py-2 rounded-lg hover:bg-[#3f38e7] transition-colors duration-300"
             >
               Dashboard
             </button>
           ) : (
             <NavLink
               to="/signin"
-              className={({ isActive }) =>
-                  `text-xl transition-colors duration-300 ${isActive ? 'text-[#5846F9]' : 'hover:text-[#5846F9]'}`
-                }
+              className = 'text-xl hidden md:block transition-colors duration-300 hover:text-[#5846F9]'
+                
             >
               Sign In
             </NavLink>
@@ -133,7 +132,9 @@ const Navbar = () => {
               ) : (
                 <NavLink
                   to="/signin"
-                  className="block text-xl text-[#5846F9]"
+                  className={({ isActive }) =>
+                    `block text-xl ${isActive ? 'text-[#5846F9]' : 'hover:text-[#5846F9]'}`
+                  }
                   onClick={closeMenu} // Close menu when Sign In is clicked
                 >
                   Sign In

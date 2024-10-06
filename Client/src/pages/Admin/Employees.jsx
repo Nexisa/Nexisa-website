@@ -13,7 +13,8 @@ const Employee = () => {
     name: "",
     email: "",
     password: "",
-    phone: ""
+    phone: "",
+    designation: ""
   });
   const [slipData, setSlipData] = useState({ file: null, month: "" });
 
@@ -55,7 +56,7 @@ const Employee = () => {
       setShowAddModal(false);
       fetchEmployees();
     } catch (err) {
-      toast.error("Something went wrong");
+      toast.error("Something went wrong:", err);
       console.error("Error adding employee:", err);
     }
   };
@@ -126,7 +127,7 @@ const Employee = () => {
       {/* Add Employee Modal */}
       {showAddModal && (
         <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-50">
-          <div className="bg-white p-6 w-80 h-80 rounded-lg shadow-lg flex flex-col justify-between">
+          <div className="bg-white p-6 w-80 h-100 rounded-lg shadow-lg flex flex-col justify-between">
             <h2 className="text-xl font-bold mb-2 text-center">Add Employee</h2>
             <div className="space-y-2">
               <input
@@ -153,6 +154,13 @@ const Employee = () => {
                 placeholder="Phone"
                 className="border p-2 w-full rounded focus:outline-none focus:ring-2 focus:ring-[#5846F9]"
                 onChange={(e) => setNewEmployee({ ...newEmployee, phone: e.target.value })}
+              />
+              <input
+                type="text"
+                placeholder="Designation"
+                name="designation"
+                className="border p-2 w-full rounded focus:outline-none focus:ring-2 focus:ring-[#5846F9]"
+                onChange={(e) => setNewEmployee({ ...newEmployee, designation: e.target.value })}
               />
             </div>
             <div className="flex justify-between mt-4">

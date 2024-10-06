@@ -30,7 +30,8 @@ const AccountInfo = () => {
           name: userData.name,
           employeeId: userData.employeeId,
           phone: userData.phone,
-          email: userData.email,// Leave password field empty
+          email: userData.email,
+          designation: userData.designation // Leave password field empty
         });
         setImageURL(userData.profilePicture); // Set the initial profile picture if available
         console.log(userDetails);
@@ -101,7 +102,7 @@ const AccountInfo = () => {
               {/* Image Upload Section */}
               <div className="md:w-1/2 mb-4 md:mt-6 text-center flex flex-col justify-center items-center">
                 {imageURL ? (
-                  <img src={imageURL} alt="Profile" className="md:w-52 h-60 rounded-2xl mb-4" />
+                  <img src={imageURL} alt="Profile" className="md:w-52 h-60 rounded-2xl mb-4 object-cover" />
                 ) : (
                   <div className="w-52 h-60 rounded-2xl bg-gray-200 mb-4 flex items-center justify-center">
                     <span className='text-xl'>No Image</span>
@@ -114,12 +115,13 @@ const AccountInfo = () => {
 
               {/* Display User Details */}
               <div className='md:w-1/2 flex justify-center items-center'>
-                <div className="bg-[#CADFFF] py-6 rounded-xl flex flex-col gap-6 items-center px-4">
+                <div className="bg-[#CADFFF] py-6 rounded-xl  flex flex-col gap-6 items-center px-4">
                   <div className="space-y-4">
-                    <p className="text-lg bg-[#E4E9F1] pl-2 rounded-lg py-2"><strong>Name:</strong> {userDetails.name}</p>
-                    <p className="text-lg bg-[#E4E9F1] pl-2 rounded-lg py-2"><strong>Employee ID:</strong> {userDetails.employeeId}</p>
-                    <p className="text-lg bg-[#E4E9F1] pl-2 rounded-lg py-2"><strong>Phone Number:</strong> {userDetails.phone}</p>
-                    <p className="text-lg bg-[#E4E9F1] px-2 rounded-lg py-2"><strong>Email:</strong> {userDetails.email}</p>
+                    <p className="text-lg bg-[#E4E9F1] px-5 rounded-lg py-2"><strong>Name:</strong> {userDetails.name}</p>
+                    <p className="text-lg bg-[#E4E9F1] px-5 rounded-lg py-2"><strong>Role:</strong> {userDetails.designation}</p>
+                    <p className="text-lg bg-[#E4E9F1] px-5 rounded-lg py-2"><strong>Employee ID:</strong> {userDetails.employeeId}</p>
+                    <p className="text-lg bg-[#E4E9F1] px-5 rounded-lg py-2"><strong>Phone Number:</strong> {userDetails.phone}</p>
+                    <p className="text-lg bg-[#E4E9F1] px-5 rounded-lg py-2"><strong>Email:</strong> {userDetails.email}</p>
                   </div>
                   {/* Update Button */}
                   <button

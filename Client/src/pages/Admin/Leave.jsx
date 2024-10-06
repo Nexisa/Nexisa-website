@@ -71,19 +71,27 @@ const LeaveApplications = () => {
       <div className='bg-[#5846F9] w-[5%] h-0.5 mx-auto mb-8'></div>
       
       {/* Leave Applications Table */}
-      <div className="space-y-4 w-11/12 mx-auto">
-        {leaves.map((leave) => (
-          <div key={leave.id} className="flex justify-between items-center p-4 bg-[#CADFFF] rounded-lg shadow">
-            <span className='text-xl'>{leave.user.name}</span>
-            <button
-              onClick={() => handleDetailsClick(leave._id)}
-              className="px-8 py-2 bg-[#5846F9] text-white rounded-full hover:bg-[#422ef4]"
-            >
-              Details
-            </button>
+      {
+        leaves.length != 0 ? (
+          <div className="space-y-4 w-11/12 mx-auto">
+            {leaves.map((leave) => (
+              <div key={leave.id} className="flex justify-between items-center p-4 bg-[#CADFFF] rounded-lg shadow">
+                <span className='text-xl'>{leave.user.name}</span>
+                <button
+                  onClick={() => handleDetailsClick(leave._id)}
+                  className="px-8 py-2 bg-[#5846F9] text-white rounded-full hover:bg-[#422ef4]"
+                >
+                  Details
+                </button>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
+        ) : (
+          <div className='flex justify-center items-center text-3xl h-full'>
+            No Active Leave Application 
+          </div>
+        )
+      }
 
       {/* Modal for Leave Details - not done yet */}
       {isModalOpen && selectedLeave && (
