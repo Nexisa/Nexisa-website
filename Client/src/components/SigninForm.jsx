@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
-import axios from "../api/axios";
-import {toast} from 'react-hot-toast';
+import { toast } from "react-hot-toast";
+import { useAuth } from "../context/AuthContext"; // Import the useAuth hook
 
 const SigninForm = () => {
   const [formData, setFormData] = useState({
@@ -11,34 +11,35 @@ const SigninForm = () => {
   });
 
   const [showPassword, setShowPassword] = useState(false);
-
   const { email, password } = formData;
   const navigate = useNavigate();
 
-  const handleOnSubmit = (e) => {
+  // Get the login function from AuthContext
+  const { login } = useAuth();
+
+  // Handle form submission
+  const handleOnSubmit = async (e) => {
     e.preventDefault();
-    axios
-      .post("/auth/signin", formData)
-      .then((result) => {
-        if (result.data.success) {
-          console.log(result.data);
-          localStorage.setItem("token", result.data.token);
-          localStorage.setItem('role', result.data.role);
-          toast.success("Signed in Successfully");
-          if(result.data.role === 'employee'){
-            navigate('/user');
-          }
-          else{
-            navigate('/admin')
-          }
-          
-        } else {
-          alert(result.data.message);
-        }
-      })
-      .catch((err) => console.log(err));
+
+    // Call the login function from AuthContext
+    const response = await login(formData);
+
+    if (response.success) {
+      // Display success toast
+
+      // Redirect based on the user's role
+      if (response.role === "employee") {
+        navigate("/user");
+      } else if (response.role === "admin") {
+        navigate("/admin");
+      }
+    } else {
+      // Handle error (response contains the error message)
+      toast.error(response.message || "Login failed");
+    }
   };
 
+  // Handle form input changes
   const handleOnChange = (e) => {
     setFormData((prevData) => ({
       ...prevData,

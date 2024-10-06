@@ -34,7 +34,7 @@ router.put("/manage-leave", manageLeaveApplication);
 router.get("/leave-applications/:id", getLeaveApplicationById);
 
 // route for adding salary slip
-router.post("/add-salary-slip", upload.single("fileUrl"), addSalarySlip);
+router.post("/add-salary-slip", upload.single("file"), addSalarySlip);
 
 // route for adding employee
 router.post("/add-employee", addEmployee);

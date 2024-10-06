@@ -67,7 +67,9 @@ exports.manageLeaveApplication = async (req, res) => {
   const { leaveId, status } = req.body; // status can be 'approved' or 'rejected'
   // console.log(leaveId)
   try {
-    const leaveApplication = await LeaveApplication.findById(leaveId).populate('user');
+    const leaveApplication = await LeaveApplication.findById(leaveId).populate(
+      "user"
+    );
 
     if (!leaveApplication)
       return res
@@ -78,35 +80,42 @@ exports.manageLeaveApplication = async (req, res) => {
     leaveApplication.status = status;
     await leaveApplication.save();
 
-
     //mail part
     const userEmail = leaveApplication.user.email;
 
-    if(leaveApplication.status === 'approved') {
-        const emailBody = leaveAcceptanceTemplate(
-          leaveApplication.user.name,
-          leaveApplication.startDate,
-          leaveApplication.endDate
-        );
+    if (leaveApplication.status === "approved") {
+      const emailBody = leaveAcceptanceTemplate(
+        leaveApplication.user.name,
+        leaveApplication.startDate,
+        leaveApplication.endDate
+      );
 
-        const mailResponse = await mailSender(userEmail, "Your request is Accepted", emailBody);
+      const mailResponse = await mailSender(
+        userEmail,
+        "Your request is Accepted",
+        emailBody
+      );
+    } else if (leaveApplication.status === "rejected") {
+      const emailBody = leaveRejecetionTemplate(
+        leaveApplication.user.name,
+        leaveApplication.startDate,
+        leaveApplication.endDate
+      );
+
+      const mailResponse = await mailSender(
+        userEmail,
+        "Your request is rejected",
+        emailBody
+      );
     }
-    else if(leaveApplication.status === 'rejected'){
-        const emailBody = leaveRejecetionTemplate(
-          leaveApplication.user.name,
-          leaveApplication.startDate,
-          leaveApplication.endDate
-        );
-
-        const mailResponse = await mailSender(userEmail, "Your request is rejected", emailBody);
-    }
-
-
 
     // Delete the leave application after the status update
     await LeaveApplication.findByIdAndDelete(leaveId);
 
-    res.json({ success: true, message: `Leave application ${status} and deleted successfully` });
+    res.json({
+      success: true,
+      message: `Leave application ${status} and deleted successfully`,
+    });
   } catch (error) {
     console.error("Error managing leave application:", error);
     res.status(500).json({ success: false, message: "Server error" });
@@ -138,8 +147,9 @@ exports.getLeaveApplicationById = async (req, res) => {
 // Admin can upload salary slip for an employee
 exports.addSalarySlip = async (req, res) => {
   const { user, month } = req.body;
+
   try {
-    // Check if Multer has successfully uploaded the file
+    // Check if the file has been uploaded
     if (!req.file) {
       return res
         .status(400)
@@ -152,14 +162,15 @@ exports.addSalarySlip = async (req, res) => {
     const newSlip = new SalarySlip({
       user: user,
       month,
-      fileUrl: upload.secure_url,
+      file: upload.secure_url,
     });
+
     await newSlip.save();
 
     res.json({
       success: true,
       message: "Salary slip added successfully",
-      fileUrl: upload.secure_url,
+      file: upload.secure_url,
     });
   } catch (error) {
     console.error("Add salary slip error:", error);
@@ -173,7 +184,6 @@ exports.addSalarySlip = async (req, res) => {
 exports.addEmployee = async (req, res) => {
   const { name, email, password, phone, designation } = req.body;
   try {
-    
     const existingUser = await User.findOne({ email });
     if (existingUser)
       return res
