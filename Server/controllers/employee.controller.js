@@ -3,6 +3,7 @@ const LeaveApplication = require("../models/LeaveApplication");
 const { uploadImage } = require("../services/CloudinaryService");
 const bcrypt = require("bcrypt");
 const SalarySlip = require("../models/SalarySlip");
+const moment = require("moment");
 
 // controller for updating the user profile (working on it not completed yet)
 exports.updateProfile = async (req, res) => {
@@ -79,15 +80,52 @@ exports.updateProfilePicture = async (req, res) => {
 // controller for sending leave application (Employee)
 exports.applyLeave = async (req, res) => {
   const { startDate, endDate, reason } = req.body;
-  const userId = req.user.id;
+  const userId = req.user._id;
+
   try {
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return res
+        .status(404)
+        .json({ success: false, message: "User not found" });
+    }
+
+    // Calculate number of leave days requested
+    const leaveDaysRequested =
+      moment(endDate).diff(moment(startDate), "days") + 1;
+
+    // Check if the leave year has changed (Reset leave count)
+    const currentYear = new Date().getFullYear();
+    if (user.leaveResetDate.getFullYear() !== currentYear) {
+      user.leaveDaysTaken = 0; // Reset leave count
+      user.leaveResetDate = new Date(currentYear, 0, 1); // Update reset date
+    }
+
+    // Check if employee has enough leave days remaining
+    if (user.leaveDaysTaken + leaveDaysRequested > 18) {
+      return res.status(400).json({
+        success: false,
+        message: `Leave request exceeds annual limit. You have ${
+          18 - user.leaveDaysTaken
+        } leave days remaining.`,
+      });
+    }
+
+    // Create the leave application
     const newLeave = new LeaveApplication({
       user: userId,
       startDate,
       endDate,
       reason,
     });
+
     await newLeave.save();
+
+    // Update user's leave days
+    user.leaveDaysTaken += leaveDaysRequested;
+    await user.save();
+
     res.json({
       success: true,
       message: "Leave application submitted successfully",
@@ -100,12 +138,11 @@ exports.applyLeave = async (req, res) => {
       .json({ success: false, message: "Server error", error: error.message });
   }
 };
-
 // get user by id
 exports.getUserById = async (req, res) => {
   try {
     const userId = req.user._id.toString();
-    const user = await User.findById(userId);
+    const user = await User.findById(userId).select("-password");
 
     if (!user) {
       return res.status(404).json({

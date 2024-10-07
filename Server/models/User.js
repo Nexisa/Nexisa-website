@@ -39,6 +39,15 @@ const userSchema = new mongoose.Schema(
     token: {
       type: String,
     },
+    // leave days taken in the current year
+    leaveDaysTaken: {
+      type: Number,
+      default: 0, // tracking of how many leave days have been taken
+    },
+    leaveResetDate: {
+      type: Date,
+      default: new Date(new Date().getFullYear(), 0, 1), // Resets at the start of each year
+    },
   },
   { timestamps: true }
 );
