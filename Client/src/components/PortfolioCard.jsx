@@ -4,7 +4,7 @@ import wave from '../assets/Portfolio/featuresWaves.svg'
 // eslint-disable-next-line react/prop-types
 const PortfolioCard = ({link, title, description, imageUrl }) => {
   return (
-    <a href={link}>
+    <a target="_blank" href={link}>
       <div className="bg-white mb-4 rounded-xl shadow-xl overflow-hidden group">
         <img src={imageUrl} alt={title} className="w-full h-48 object-cover transform 
         transition-transform duration-300 ease-in-out group-hover:scale-105" />
