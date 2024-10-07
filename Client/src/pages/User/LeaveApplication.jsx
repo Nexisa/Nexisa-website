@@ -11,7 +11,7 @@ const LeaveApplication = () => {
   const [endDate, setEndDate] = useState(null);
   const [leaveTaken, setLeaveTaken] = useState(0); // To store leaveDaysTaken
   const [remainingLeave, setRemainingLeave] = useState(0); // To store remaining leave
-  const leaveQuota = 18; // Assuming 24 days leave quota per year
+  const leaveQuota = 18;
   const handleSubmit = async (e) => {
     e.preventDefault();
 

@@ -7,7 +7,7 @@ const { v4: uuidv4 } = require("uuid");
 const leaveAcceptanceTemplate = require("../mailTemplate/leaveAcceptance");
 const mailSender = require("../services/mailSender");
 const leaveRejecetionTemplate = require("../mailTemplate/leaveRejection");
-
+const moment = require("moment");
 // Admin can view all employees
 exports.getAllEmployees = async (req, res) => {
   try {
@@ -65,48 +65,50 @@ exports.getAllLeaveApplications = async (req, res) => {
 // Admin can approve/reject leave application
 exports.manageLeaveApplication = async (req, res) => {
   const { leaveId, status } = req.body; // status can be 'approved' or 'rejected'
-  // console.log(leaveId)
+
   try {
     const leaveApplication = await LeaveApplication.findById(leaveId).populate(
       "user"
     );
 
-    if (!leaveApplication)
+    if (!leaveApplication) {
       return res
         .status(404)
         .json({ success: false, message: "Leave application not found" });
+    }
 
     // Update the status of the leave application
     leaveApplication.status = status;
     await leaveApplication.save();
 
-    //mail part
-    const userEmail = leaveApplication.user.email;
+    // Get the user associated with the leave application
+    const user = leaveApplication.user;
 
     if (leaveApplication.status === "approved") {
+      // Calculate leave days
+      const startDate = moment(leaveApplication.startDate);
+      const endDate = moment(leaveApplication.endDate);
+      const leaveDays = endDate.diff(startDate, "days") + 1; // Calculate total leave days
+
+      // Update user's leave days
+      user.leaveDaysTaken += leaveDays;
+      await user.save(); // Save the updated user
+
+      // Send approval email
       const emailBody = leaveAcceptanceTemplate(
-        leaveApplication.user.name,
+        user.name,
         leaveApplication.startDate,
         leaveApplication.endDate
       );
-
-      const mailResponse = await mailSender(
-        userEmail,
-        "Your request is Accepted",
-        emailBody
-      );
+      await mailSender(user.email, "Your request is Accepted", emailBody);
     } else if (leaveApplication.status === "rejected") {
+      // Send rejection email
       const emailBody = leaveRejecetionTemplate(
-        leaveApplication.user.name,
+        user.name,
         leaveApplication.startDate,
         leaveApplication.endDate
       );
-
-      const mailResponse = await mailSender(
-        userEmail,
-        "Your request is rejected",
-        emailBody
-      );
+      await mailSender(user.email, "Your request is rejected", emailBody);
     }
 
     // Delete the leave application after the status update
