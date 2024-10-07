@@ -5,7 +5,7 @@ const bcrypt = require("bcrypt");
 const SalarySlip = require("../models/SalarySlip");
 const moment = require("moment");
 
-// controller for updating the user profile
+// controller for updating the user profile (working on it not completed yet)
 exports.updateProfile = async (req, res) => {
   const { name, phone, email, password } = req.body;
   const userId = req.user._id;
@@ -46,7 +46,7 @@ exports.updateProfile = async (req, res) => {
   }
 };
 
-// update only profile picture
+// update only profile picture (still working on this not completed yet)
 exports.updateProfilePicture = async (req, res) => {
   const userId = req.user._id;
   try {
@@ -95,7 +95,24 @@ exports.applyLeave = async (req, res) => {
     const leaveDaysRequested =
       moment(endDate).diff(moment(startDate), "days") + 1;
 
-    // Create the leave application (no leave balance checks or deductions)
+    // Check if the leave year has changed (Reset leave count)
+    const currentYear = new Date().getFullYear();
+    if (user.leaveResetDate.getFullYear() !== currentYear) {
+      user.leaveDaysTaken = 0; // Reset leave count
+      user.leaveResetDate = new Date(currentYear, 0, 1); // Update reset date
+    }
+
+    // Check if employee has enough leave days remaining
+    if (user.leaveDaysTaken + leaveDaysRequested > 18) {
+      return res.status(400).json({
+        success: false,
+        message: `Leave request exceeds annual limit. You have ${
+          18 - user.leaveDaysTaken
+        } leave days remaining.`,
+      });
+    }
+
+    // Create the leave application
     const newLeave = new LeaveApplication({
       user: userId,
       startDate,
@@ -104,6 +121,10 @@ exports.applyLeave = async (req, res) => {
     });
 
     await newLeave.save();
+
+    // Update user's leave days
+    user.leaveDaysTaken += leaveDaysRequested;
+    await user.save();
 
     res.json({
       success: true,
