@@ -6,7 +6,6 @@ import { useAuth } from "../context/AuthContext";
 const Navbar = () => {
   const { isAuthenticated } = useAuth(); // Use the authentication state from context
   const [isOpen, setIsOpen] = useState(false);
-
   const [userRole, setUserRole] = useState(null);
   const navigate = useNavigate();
 
