@@ -78,7 +78,6 @@ const SalarySlip = () => {
                       <a
                         href={data.file} // Changed to `data.file` to match the API response
                         target="_blank" // Open in a new tab
-                        rel="noopener noreferrer" // Security improvement
                         className="px-12 py-2 bg-[#5846F9] text-white rounded-lg hover:bg-[#402cf7] focus:outline-none focus:ring-2 focus:ring-[#5846F9]"
                         aria-label={`Download ${data.month} salary slip`}
                       >
