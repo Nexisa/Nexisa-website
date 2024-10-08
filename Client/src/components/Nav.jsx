@@ -23,7 +23,7 @@ const Navbar = () => {
   useEffect(() => {
     const role = localStorage.getItem("role"); // Assuming the role is stored in localStorage
     setUserRole(role); // Set the role in state
-  }, []); // Only run once on mount
+  }); // Only run once on mount
 
   // Handle redirection based on user role
   const handleDashboardClick = () => {

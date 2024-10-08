@@ -22,6 +22,8 @@ import kritika from "../assets/Team/kritika.jpg";
 import ayush from "../assets/Team/Ayush.jpg";
 import rishav from "../assets/Team/rishav.jpg";
 import harshika from "../assets/Team/harshika.jpg";
+import ahan from '../assets/Team/ahan.jpg';
+import partha from '../assets/Team/partha.jpg'
 
 //gallery
 import dinner from "../assets/Gallery/dinner.jpg";
@@ -146,6 +148,16 @@ export const teamData = [
     name: "RISHAV MUKHERJEE",
     role: "App Developer Intern",
   },
+  {
+    imgUrl: `${ahan}`,
+    name: 'AHAN GHOSH',
+    role: 'Backend Developer Intern'
+  },
+  {
+    imgUrl: `${partha}`,
+    name: 'PARTHABRATA GANGULY',
+    role: 'DevOps Intern'
+  }
 ];
 
 export const services = [
