@@ -14,7 +14,7 @@ const Footer = () => {
           <div className="flex space-x-4 mt-4 justify-center md:justify-start">
             {/* Social Icons */}
             <a
-              href="https://x.com"
+              href="https://x.com/Nexisa157839"
               target="_blank"
               rel="noreferrer"
               className="border border-solid border-gray-300 rounded-full p-2
@@ -23,7 +23,7 @@ const Footer = () => {
               <FaXTwitter />
             </a>
             <a
-              href="https://facebook.com"
+              href="https://www.facebook.com/people/Nexisa/61564987381062/"
               target="_blank"
               rel="noreferrer"
               className="border border-solid border-gray-300 rounded-full p-2
@@ -32,7 +32,7 @@ const Footer = () => {
               <FaFacebook />
             </a>
             <a
-              href="https://instagram.com"
+              href="https://www.instagram.com/nexisa.co"
               target="_blank"
               rel="noreferrer"
               className="border border-solid border-gray-300 rounded-full p-2
@@ -41,7 +41,7 @@ const Footer = () => {
               <FaInstagram />
             </a>
             <a
-              href="https://linkedin.com"
+              href="https://www.linkedin.com/company/nexisa/"
               target="_blank"
               rel="noreferrer"
               className="border border-solid border-gray-300 rounded-full p-2
@@ -95,10 +95,10 @@ const Footer = () => {
             <p>
               Email:{" "}
               <a
-                href="mailto:aneek@nexisa.co.in"
+                href="mailto:nexisa1996@gmail.com"
                 className="hover:text-gray-300"
               >
-                aneek@nexisa.co.in
+                nexisa1996@gmail.com
               </a>
             </p>
           </div>

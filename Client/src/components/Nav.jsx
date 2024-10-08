@@ -163,7 +163,7 @@ const Navbar = () => {
                     handleDashboardClick();
                     closeMenu(); // Close menu when dashboard is clicked
                   }}
-                  className="block text-xl text-[#5846F9] w-full text-left"
+                  className="block text-xl text-gray-800 w-full text-left"
                 >
                   Dashboard
                 </button>
