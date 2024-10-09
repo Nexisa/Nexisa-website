@@ -97,27 +97,6 @@ exports.applyLeave = async (req, res) => {
         .json({ success: false, message: "User not found" });
     }
 
-    // Calculate number of leave days requested
-    const leaveDaysRequested =
-      moment(endDate).diff(moment(startDate), "days") + 1;
-
-    // Check if the leave year has changed (Reset leave count)
-    const currentYear = new Date().getFullYear();
-    if (user.leaveResetDate.getFullYear() !== currentYear) {
-      user.leaveDaysTaken = 0; // Reset leave count
-      user.leaveResetDate = new Date(currentYear, 0, 1); // Update reset date
-    }
-
-    // Check if employee has enough leave days remaining
-    if (user.leaveDaysTaken + leaveDaysRequested > 18) {
-      return res.status(400).json({
-        success: false,
-        message: `Leave request exceeds annual limit. You have ${
-          18 - user.leaveDaysTaken
-        } leave days remaining.`,
-      });
-    }
-
     // Create the leave application
     const newLeave = new LeaveApplication({
       user: userId,
@@ -127,10 +106,6 @@ exports.applyLeave = async (req, res) => {
     });
 
     await newLeave.save();
-
-    // Update user's leave days
-    user.leaveDaysTaken += leaveDaysRequested;
-    await user.save();
 
     res.json({
       success: true,
@@ -144,6 +119,7 @@ exports.applyLeave = async (req, res) => {
       .json({ success: false, message: "Server error", error: error.message });
   }
 };
+
 // get user by id
 exports.getUserById = async (req, res) => {
   try {

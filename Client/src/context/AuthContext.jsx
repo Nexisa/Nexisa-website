@@ -5,8 +5,6 @@ import { toast } from "react-hot-toast";
 // Create AuthContext to manage authentication globally
 const AuthContext = createContext();
 
-// AuthProvider component that wraps around the app to provide auth functionality
-// eslint-disable-next-line react/prop-types
 export const AuthProvider = ({ children }) => {
   // State to track whether the user is authenticated
   const [isAuthenticated, setIsAuthenticated] = useState(
@@ -14,6 +12,7 @@ export const AuthProvider = ({ children }) => {
   );
 
   // Login function for authenticating users
+
   const login = async (formData) => {
     try {
       // Send request to server for authentication
@@ -31,17 +30,27 @@ export const AuthProvider = ({ children }) => {
         // Show a success message to the user
         toast.success("Logged in successfully!");
 
-        // Optionally return success and role, though this can be handled separately in components
         return { success: true, role: response.data.role };
-      } else {
-        // If login fails, show an error message
-        toast.error(response.data.message);
-        return { success: false, message: response.data.message };
       }
     } catch (error) {
-      // Handle any unexpected errors (like network issues)
+      // Handle server error and display an appropriate message
+      console.log(error.response?.status);
+      // Check for specific failure messages and display appropriate toast
+      if (error?.response?.status === 400) {
+        toast.error(
+          "Invalid credentials. Please check your email and password."
+        );
+      } else if (error?.response?.status === 404) {
+        toast.error("User not found. Please check your email.");
+      } else if (error?.response?.status === 500) {
+        toast.error("Server error. Please try again later.");
+      }
+
       console.error("Login error:", error);
-      // toast.error("An unexpected error occurred.");
+
+      if (error?.message === "Network Error") {
+        toast.error("Network Error.");
+      }
       return { success: false, message: "An unexpected error occurred." };
     }
   };
