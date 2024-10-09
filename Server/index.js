@@ -22,7 +22,7 @@ app.use(
   })
 );
 app.get("/", (req, res) => {
-  res.send("Server is up and running");
+  res.json("Server is up and running");
 })
 //********************************routes********************************
 app.use("/api/auth", authRoutes); // Authentication routes
