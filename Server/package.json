@@ -7,6 +7,10 @@
     "start": "node index.js",
     "dev": "nodemon index.js"
   },
+  "engines": {
+    "node": ">=14.0.0",
+    "yarn": "20.x"
+  },
   "author": "asham",
   "license": "ISC",
   "dependencies": {
