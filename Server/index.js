@@ -21,7 +21,9 @@ app.use(
     credentials: true,
   })
 );
-
+app.get("/", (req, res) => {
+  res.send("Server is up and running");
+})
 //********************************routes********************************
 app.use("/api/auth", authRoutes); // Authentication routes
 app.use("/api/employee", employeeRoutes); // Employee specific routes
