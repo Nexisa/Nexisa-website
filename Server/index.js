@@ -8,6 +8,7 @@ const employeeRoutes = require("./routes/employee.routes");
 const adminRoutes = require("./routes/admin.routes");
 const { cloudinaryConnect } = require("./config/cloudinary");
 //********************************database connection********************************
+
 connectDB();
 cloudinaryConnect();
 //********************************middlewares********************************
@@ -23,7 +24,7 @@ app.use(
 );
 app.get("/", (req, res) => {
   res.json("Server is up and running");
-})
+});
 //********************************routes********************************
 app.use("/api/auth", authRoutes); // Authentication routes
 app.use("/api/employee", employeeRoutes); // Employee specific routes

@@ -1,6 +1,6 @@
 const express = require("express");
 const multer = require("multer");
-const upload = multer({ dest: "uploads/" }); // Store files in the "uploads" directory temporarily
+
 const {
   updateProfile,
   applyLeave,
@@ -9,7 +9,7 @@ const {
   getSalarySlips,
 } = require("../controllers/employee.controller");
 const authMiddleware = require("../middlewares/auth.middleware");
-
+const upload = require("../middlewares/multer");
 const router = express.Router();
 
 // route for updating the user profile (by employee only)
