@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: ["https://nexisa-backend.vercel.app"],
+    origin: ["https://nexisa-website.pages.dev"],
     methods: ["GET", "POST", "DELETE", "PUT"],
     credentials: true,
   })
