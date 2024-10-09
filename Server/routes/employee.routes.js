@@ -9,7 +9,7 @@ const {
   getSalarySlips,
 } = require("../controllers/employee.controller");
 const authMiddleware = require("../middlewares/auth.middleware");
-const upload = require("../middlewares/multer");
+const { upload } = require("../middlewares/multer");
 const router = express.Router();
 
 // route for updating the user profile (by employee only)

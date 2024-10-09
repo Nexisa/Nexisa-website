@@ -13,7 +13,7 @@ const {
 } = require("../controllers/admin.controller");
 const authMiddleware = require("../middlewares/auth.middleware");
 const router = express.Router();
-const upload = require("../middlewares/multer");
+const { upload } = require("../middlewares/multer");
 // Apply admin authentication middleware to all routes
 router.use(authMiddleware(["admin"]));
 

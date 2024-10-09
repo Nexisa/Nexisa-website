@@ -8,6 +8,7 @@ const leaveAcceptanceTemplate = require("../mailTemplate/leaveAcceptance");
 const mailSender = require("../services/mailSender");
 const leaveRejecetionTemplate = require("../mailTemplate/leaveRejection");
 const moment = require("moment");
+const { getDataUri } = require("../config/datauri");
 // Admin can view all employees
 exports.getAllEmployees = async (req, res) => {
   try {
@@ -149,22 +150,25 @@ exports.getLeaveApplicationById = async (req, res) => {
 // Admin can upload salary slip for an employee
 exports.addSalarySlip = async (req, res) => {
   const { user, month } = req.body;
+  let cloudResponse;
 
   try {
+    const file = req.file;
     // Check if the file has been uploaded
-    if (!req.file) {
+    if (!file) {
       return res
         .status(400)
         .json({ success: false, message: "No file provided" });
     }
-
-    // Upload the file to Cloudinary
-    const upload = await uploadImage(req.file.path);
+    if (file) {
+      const fileUri = getDataUri(file);
+      cloudResponse = await uploadImage(fileUri);
+    }
 
     const newSlip = new SalarySlip({
       user: user,
       month,
-      file: upload.secure_url,
+      file: cloudResponse.secure_url,
     });
 
     await newSlip.save();
@@ -172,7 +176,7 @@ exports.addSalarySlip = async (req, res) => {
     res.json({
       success: true,
       message: "Salary slip added successfully",
-      file: upload.secure_url,
+      file: cloudResponse.secure_url,
     });
   } catch (error) {
     console.error("Add salary slip error:", error);
