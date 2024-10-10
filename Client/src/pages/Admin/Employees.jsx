@@ -131,7 +131,7 @@ const Employee = () => {
           Add Employee
         </button>
       </div>
-      <div className="md:w-10/12 mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="md:w-11/12 mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
         {employees.map((employee) => (
           <EmployeeCard
             key={employee._id}
