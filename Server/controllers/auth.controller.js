@@ -1,6 +1,7 @@
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const { v4: uuidv4 } = require("uuid");
 
 //controller for login employee admin
 exports.login = async (req, res) => {
@@ -58,7 +59,7 @@ exports.login = async (req, res) => {
 //signup for user
 exports.signup = async (req, res) => {
   try {
-    const { name, email, password, phone } = req.body;
+    const { name, email, password, phone, role } = req.body;
 
     if (!name || !phone || !email || !password) {
       return res.status(403).json({
@@ -82,6 +83,8 @@ exports.signup = async (req, res) => {
       phone: phone,
       email: email,
       password: hashedPassword,
+      role: role,
+      employeeId: uuidv4().substr(0, 8),
       profilePicture: `https://api.dicebear.com/5.x/initials/svg?seed=${name}`,
     });
 
