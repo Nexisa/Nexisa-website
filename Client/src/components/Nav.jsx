@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate, Link } from "react-router-dom";
 import logo from "../assets/Logo/nexisa.png";
 import { useAuth } from "../context/AuthContext";
 
@@ -38,9 +38,11 @@ const Navbar = () => {
     <nav className="bg-white sticky top-0 z-50 shadow-xl">
       <div className="w-11/12 container mx-auto flex justify-between items-center py-2 px-6">
         {/* Logo */}
-        <div className="flex items-center">
-          <img src={logo} alt="Nexisa Logo" className="h-10 w-36" />
-        </div>
+        <Link to='/'>
+          <div className="flex items-center">
+            <img src={logo} alt="Nexisa Logo" className="h-10 w-36" />
+          </div>
+        </Link>
 
         {/* Navigation Links for larger screens */}
         <ul className="hidden md:flex space-x-8 text-gray-800 font-medium">
