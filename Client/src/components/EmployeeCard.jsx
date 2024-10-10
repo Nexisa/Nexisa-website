@@ -12,7 +12,7 @@ const EmployeeCard = ({ employee, onUploadClick, onDeleteClick }) => {
   return (
     <div className="border rounded-2xl p-4 shadow-lg flex flex-col md:flex-row justify-between gap-6 md:gap-10 items-center bg-[#CADFFF]">
       {/* Left Section - Profile Picture and Buttons */}
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center md:w-[30%]">
         <img
           src={employee.profilePicture}
           alt={`${employee.name}'s profile`}
@@ -37,7 +37,7 @@ const EmployeeCard = ({ employee, onUploadClick, onDeleteClick }) => {
       </div>
 
       {/* Right Section - Employee Details */}
-      <div className="w-full space-y-4 md:space-y-6">
+      <div className="w-full md:w-[70%] space-y-4">
         <p className="text-xl md:text-2xl font-bold text-center md:text-left">
           {employee.name}
         </p>
