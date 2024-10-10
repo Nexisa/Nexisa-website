@@ -47,20 +47,16 @@ const EmployeeCard = ({ employee, onUploadClick, onDeleteClick }) => {
 
         {/* Responsive fields */}
         <div className="bg-[#E4E9F1] px-3 py-2 rounded-lg">
-          <p className="text-gray-700 font-medium">Employee ID:</p>
-          <p className="text-gray-600 truncate">{employee.employeeId}</p>
+          <p className="text-gray-700 font-medium">Employee ID: {employee.employeeId}</p>
         </div>
         <div className="bg-[#E4E9F1] px-3 py-2 rounded-lg">
-          <p className="text-gray-700 font-medium">Email:</p>
-          <p className="text-gray-600 break-all">{employee.email}</p>
+          <p className="text-gray-700 font-medium">Email: {employee.email}</p>
         </div>
         <div className="bg-[#E4E9F1] px-3 py-2 rounded-lg">
-          <p className="text-gray-700 font-medium">Phone:</p>
-          <p className="text-gray-600">{employee.phone}</p>
+          <p className="text-gray-700 font-medium">Phone: {employee.phone}</p>
         </div>
         <div className="bg-[#E4E9F1] px-3 py-2 rounded-lg">
-          <p className="text-gray-700 font-medium">Remaining Leave:</p>
-          <p className="text-gray-600">{remainingLeave()}</p>
+          <p className="text-gray-700 font-medium">Remaining Leave: {remainingLeave()}</p>
         </div>
       </div>
     </div>
