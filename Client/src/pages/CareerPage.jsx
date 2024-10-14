@@ -31,7 +31,7 @@ const CareerPage = () => {
             love to hear from you. Showcase your talent with us by filling out
             the form below.
           </p>
-          <a href="https://forms.gle/g96sj8FtojUWQius7">
+          <a href="https://forms.gle/g96sj8FtojUWQius7" target="_blank" rel="noopener noreferrer">
             <button className="bg-[#5846F9] text-white font-bold px-6 py-3 rounded-lg 
             shadow-lg hover:bg-[#4834f7] transition duration-300">
               Get Started Here
