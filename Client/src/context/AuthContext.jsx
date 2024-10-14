@@ -5,6 +5,7 @@ import { toast } from "react-hot-toast";
 // Create AuthContext to manage authentication globally
 const AuthContext = createContext();
 
+// eslint-disable-next-line react/prop-types
 export const AuthProvider = ({ children }) => {
   // State to track whether the user is authenticated
   const [isAuthenticated, setIsAuthenticated] = useState(

@@ -3,7 +3,8 @@
 const leaveRejecetionTemplate = (name, startDate, endDate) => {
     const formatDate = (value) => {
         if (!value) return 'N/A';
-        const date = new Date(value); // 'value' refers to 'startDate'
+        const date = new Date(value);
+        date.setDate(date.getDate());
         return new Intl.DateTimeFormat('en-GB', {
             year: 'numeric',
             month: '2-digit',
