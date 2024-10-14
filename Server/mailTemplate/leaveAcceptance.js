@@ -4,7 +4,7 @@ const leaveAcceptanceTemplate = (name, startDate, endDate) => {
     const formatDate = (value) => {
         if (!value) return 'N/A';
         const date = new Date(value);
-        date.setDate(date.getDate());
+        date.setDate(date.getDate() + 1);
         return new Intl.DateTimeFormat('en-GB', {
             year: 'numeric',
             month: '2-digit',
