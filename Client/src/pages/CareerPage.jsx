@@ -31,10 +31,12 @@ const CareerPage = () => {
             love to hear from you. Showcase your talent with us by filling out
             the form below.
           </p>
-          <button className="bg-[#5846F9] text-white font-bold px-6 py-3 rounded-lg 
-          shadow-lg hover:bg-[#4834f7] transition duration-300">
-            Get Started Here
-          </button>
+          <a href="https://forms.gle/g96sj8FtojUWQius7">
+            <button className="bg-[#5846F9] text-white font-bold px-6 py-3 rounded-lg 
+            shadow-lg hover:bg-[#4834f7] transition duration-300">
+              Get Started Here
+            </button>
+          </a>
         </div>
       </div>
     </div>
