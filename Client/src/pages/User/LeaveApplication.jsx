@@ -4,13 +4,17 @@ import "react-datepicker/dist/react-datepicker.css";
 import { FiCalendar } from "react-icons/fi";
 import axios from "../../api/axios";
 import { toast } from "react-hot-toast";
+import { FaHistory } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const LeaveApplication = () => {
   const [reason, setReason] = useState("");
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
+  // eslint-disable-next-line no-unused-vars
   const [leaveTaken, setLeaveTaken] = useState(0); // To store leaveDaysTaken
   const [remainingLeave, setRemainingLeave] = useState(0); // To store remaining leave
+  const navigate = useNavigate();
   const leaveQuota = 18;
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -79,13 +83,21 @@ const LeaveApplication = () => {
       <h2 className="text-3xl font-semibold text-center mb-4 text-[#2C4964]">
         Leave Application
       </h2>
-      <div className="bg-[#5846F9] w-[5%] h-0.5 mx-auto mb-8"></div>
+      <div className="bg-[#5846F9] w-[5%] h-0.5 mx-auto mb-4"></div>
 
       {/* Show remaining leave days */}
-      <div className="text-center mb-8">
+      <div className="text-center mb-2">
         <h3 className="text-xl font-semibold">
           Remaining Leave Days: {remainingLeave}
         </h3>
+      </div>
+      <div className="flex justify-center items-center mb-8">
+        <button 
+          className="px-6 py-1 bg-[#5846F9] text-white rounded-full hover:bg-[#422ef4] flex justify-between items-center gap-2"
+          onClick={()=>(navigate('/user/leave-details'))}
+        >
+          <FaHistory /> History
+        </button>
       </div>
       <div className="flex justify-center items-center w-11/12 mx-auto mt-10">
         <form

@@ -7,6 +7,8 @@ const {
   updateProfilePicture,
   getUserById,
   getSalarySlips,
+  getAllLeave,
+  getLeaveById,
 } = require("../controllers/employee.controller");
 const authMiddleware = require("../middlewares/auth.middleware");
 const { upload } = require("../middlewares/multer");
@@ -27,6 +29,8 @@ router.get("/profile", authMiddleware(["employee"]), getUserById);
 
 // route for applying leave (by employee only)
 router.post("/leave", authMiddleware(["employee"]), applyLeave);
+router.get('/leave-details', authMiddleware(["employee"]), getAllLeave);
+router.get('/leaveById/:id', authMiddleware(["employee"]), getLeaveById)
 
 //route for getting user details
 router.get("/user-details", authMiddleware(), getUserById);

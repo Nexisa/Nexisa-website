@@ -50,10 +50,10 @@ exports.getEmployeeById = async (req, res) => {
   }
 };
 
-// Admin can view all leave applications
+// Admin can view all leave applications - pending ones
 exports.getAllLeaveApplications = async (req, res) => {
   try {
-    const leaveApplications = await LeaveApplication.find().populate(
+    const leaveApplications = await LeaveApplication.find({status:"pending"}).populate(
       "user",
       "name email"
     );
@@ -62,6 +62,19 @@ exports.getAllLeaveApplications = async (req, res) => {
     res.status(500).json({ success: false, message: "Server error" });
   }
 };
+
+// Admin can view all leave applications - approved ones
+exports.getAllApprovedLeaveApplications = async (req, res) => {
+  try {
+    const leaveApplications = await LeaveApplication.find({status:"approved"}).populate(
+      "user",
+      "name email"
+    );
+    res.json({ success: true, leaveApplications });
+  } catch (error) {
+    res.status(500).json({ success: false, message: "Server error" });
+  }
+}
 
 // Admin can approve/reject leave application
 exports.manageLeaveApplication = async (req, res) => {
@@ -113,17 +126,17 @@ exports.manageLeaveApplication = async (req, res) => {
     }
 
     // Delete the leave application after the status update
-    await LeaveApplication.findByIdAndDelete(leaveId);
+    // await LeaveApplication.findByIdAndDelete(leaveId);
 
     res.json({
       success: true,
-      message: `Leave application ${status} and deleted successfully`,
+      message: `Leave application ${status}`,
     });
   } catch (error) {
     console.error("Error managing leave application:", error);
     res.status(500).json({ success: false, message: "Server error" });
   }
-};
+}; 
 
 // function to get a specific leave application by ID
 exports.getLeaveApplicationById = async (req, res) => {

@@ -20,6 +20,8 @@ import Employees from "./pages/Admin/Employees";
 import UserProtection from "./components/UserProtection";
 import AdminProtection from "./components/AdminProtection";
 import { AuthProvider } from "./context/AuthContext";
+import LeaveDetails from "./pages/User/LeaveDetails";
+import LeaveHistory from "./pages/Admin/LeaveHistory";
 
 function App() {
   return (
@@ -66,6 +68,14 @@ function App() {
             }
           />
           <Route
+            path="user/leave-details"
+            element={
+              <UserProtection>
+                <LeaveDetails />
+              </UserProtection>
+            }
+          />
+          <Route
             path="/admin"
             element={
               <AdminProtection>
@@ -78,6 +88,14 @@ function App() {
             element={
               <AdminProtection>
                 <Leave />
+              </AdminProtection>
+            }
+          />
+          <Route
+            path="/admin/leave-history"
+            element={
+              <AdminProtection>
+                <LeaveHistory />
               </AdminProtection>
             }
           />

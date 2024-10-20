@@ -120,6 +120,66 @@ exports.applyLeave = async (req, res) => {
   }
 };
 
+exports.getAllLeave = async (req, res) => {
+  try {
+    const userId = req.user._id;
+    const leaveStatus = await LeaveApplication.find({user: userId});
+    if(!leaveStatus){
+      return res.status(404).json({
+        success:false,
+        message:"No leave application found",
+      });
+    }
+
+    return res.status(200).json({
+      success:true,
+      message:'All leaves fetched successfully',
+      leaveStatus
+    });
+
+  } catch (error) {
+    console.log("Error while fetching leave --> ", error);
+    return res.status(500).json({
+      success:false,
+      message:'Something went wrong while fetching leaves'
+    })
+  }
+}
+
+exports.getLeaveById = async (req, res) => {
+  try {
+    const {id} = req.params;
+    if(!id){
+      return res.status(401).json({
+        success:false,
+        message:'No id is found in params'
+      });
+    }
+
+    const leave = await LeaveApplication.findById(id);
+
+    if(!leave){
+      return res.status(404).json({
+        success:false,
+        message:'Leave not found'
+      });
+    }
+
+    return res.status(200).json({
+      success:true,
+      message:'Leave fetched successfully',
+      leave
+    })
+
+  } catch (error) {
+    console.log("Error while fetching leave by ID -> ", error);
+    return res.status(500).json({
+      success:false,
+      message:'Error while fetching leave by ID'
+    })
+  }
+}
+
 // get user by id
 exports.getUserById = async (req, res) => {
   try {

@@ -16,7 +16,7 @@ const LeaveApplications = () => {
             Authorization: `Bearer ${token}`, // Include the token in the request header
             },
         });
-        console.log(response.data.leaveApplications)
+        // console.log(response.data.leaveApplications)
         setLeaves(response.data.leaveApplications); // Assuming response.data is an array of leave applications
       } catch (error) {
         console.error('Error fetching leave applications:', error);
@@ -36,7 +36,7 @@ const LeaveApplications = () => {
             Authorization: `Bearer ${token}`, // Include the token in the request header
             },
         });
-      console.log(response.data.leaveApplication)
+      // console.log(response.data.leaveApplication)
       setSelectedLeave(response.data.leaveApplication);
       setIsModalOpen(true);
     } catch (error) {
@@ -110,8 +110,8 @@ const LeaveApplications = () => {
             <div className='space-y-5'>
               <p className='bg-[#CADFFF] py-2 px-2 mx-8 rounded-lg text-center'><strong>Reason:</strong> {selectedLeave.reason}</p>
               <div className='flex gap-6 px-8'>
-                <p className='bg-[#CADFFF] w-1/2 py-2 px-2 rounded-lg text-center'><strong>Start Date:</strong> {new Date(selectedLeave.startDate).toLocaleDateString()}</p>
-                <p className='bg-[#CADFFF] w-1/2 py-2 px-2 rounded-lg text-center'><strong>End Date:</strong> {new Date(selectedLeave.endDate).toLocaleDateString()}</p>
+                <p className='bg-[#CADFFF] w-1/2 py-2 px-2 rounded-lg text-center'><strong>Start Date:</strong> {new Date(selectedLeave.startDate).toLocaleDateString('en-GB')}</p>
+                <p className='bg-[#CADFFF] w-1/2 py-2 px-2 rounded-lg text-center'><strong>End Date:</strong> {new Date(selectedLeave.endDate).toLocaleDateString('en-GB')}</p>
               </div>
             </div>
 

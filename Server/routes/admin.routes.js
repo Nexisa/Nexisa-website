@@ -10,6 +10,7 @@ const {
   addSalarySlip,
   addEmployee,
   deleteEmployee,
+  getAllApprovedLeaveApplications,
 } = require("../controllers/admin.controller");
 const authMiddleware = require("../middlewares/auth.middleware");
 const router = express.Router();
@@ -25,6 +26,7 @@ router.get("/employees/:id", getEmployeeById);
 
 // route for getting all leave applications
 router.get("/leave-applications", getAllLeaveApplications);
+router.get('/approved-leaves', getAllApprovedLeaveApplications)
 
 // route for managing leave application
 router.put("/manage-leave", manageLeaveApplication);

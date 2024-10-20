@@ -1,14 +1,11 @@
 // import React from 'react'
 import { Link, useNavigate } from "react-router-dom";
 import image from "../../assets/Logo/about.jpg";
-import axios from "../../api/axios";
-import { toast } from "react-hot-toast";
-import { useEffect } from "react";
 import { useAuth } from "../../context/AuthContext"; // Import the AuthContext
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
-  const { isAuthenticated, logout } = useAuth(); // Get authentication state and logout function
+  const { logout } = useAuth(); // Get logout function
 
   const logoutHandler = async () => {
     try {
@@ -39,9 +36,9 @@ const AdminDashboard = () => {
                 Leave Applications
               </div>
             </Link>
-            <Link to="/admin/others">
+            <Link to="/admin/leave-history">
               <div className="bg-[#5846F9] text-white p-4 rounded-xl text-center cursor-pointer">
-                Others
+                Leave History
               </div>
             </Link>
             <Link to="/admin/employees">
