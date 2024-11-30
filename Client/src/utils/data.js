@@ -17,9 +17,7 @@ import khushi from "../assets/Team/Khushi.jpg";
 import asham from "../assets/Team/Asham.jpg";
 import omkar from "../assets/Team/Omkar.jpg";
 import priyanshu from "../assets/Team/Priyanshu.jpg";
-import srijita from "../assets/Team/Srijita.jpg";
 import kritika from "../assets/Team/kritika.jpg";
-import ayush from "../assets/Team/Ayush.jpg";
 import rishav from "../assets/Team/rishav.jpg";
 import harshika from "../assets/Team/harshika.jpg";
 import ahan from '../assets/Team/ahan.jpg';
@@ -74,7 +72,7 @@ export const portfolioData = [
     title: "Baizus Hotel",
     description: "Designed an app and increased app engagement for a hotel-chain company",
     imageUrl: `${baizu}`,
-    link: '/none'
+    link: 'https://baizushotels.com/'
   },
 ];
 
@@ -130,18 +128,8 @@ export const teamData = [
     role: "UI/UX Designer, Front-End Developer Intern",
   },
   {
-    imgUrl: `${ayush}`,
-    name: "AAYUSH KUMAR",
-    role: "Full-Stack Developer Intern",
-  },
-  {
     imgUrl: `${priyanshu}`,
     name: "PRIYANSHU DEY",
-    role: "Backend Developer Intern",
-  },
-  {
-    imgUrl: `${srijita}`,
-    name: "SRIJITA DAS",
     role: "Backend Developer Intern",
   },
   {
