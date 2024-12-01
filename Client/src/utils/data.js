@@ -20,8 +20,6 @@ import priyanshu from "../assets/Team/Priyanshu.jpg";
 import kritika from "../assets/Team/kritika.jpg";
 import rishav from "../assets/Team/rishav.jpg";
 import harshika from "../assets/Team/harshika.jpg";
-import ahan from '../assets/Team/ahan.jpg';
-import partha from '../assets/Team/partha.jpg'
 import prakash from '../assets/Team/prakash.jpg'
 
 //gallery
@@ -141,16 +139,6 @@ export const teamData = [
     imgUrl: `${rishav}`,
     name: "RISHAV MUKHERJEE",
     role: "App Developer Intern",
-  },
-  {
-    imgUrl: `${ahan}`,
-    name: 'AHAN GHOSH',
-    role: 'Backend Developer Intern'
-  },
-  {
-    imgUrl: `${partha}`,
-    name: 'PARTHABRATA GANGULY',
-    role: 'DevOps Intern'
   }
 ];
 
